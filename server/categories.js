@@ -1,20 +1,19 @@
 const clone = require('clone');
-const config = require('./config');
 
 let db = {};
 
 const defaultData = {
   categories: [
     {
-      name: 'react',
+      name: 'React',
       path: 'react',
     },
     {
-      name: 'redux',
+      name: 'Redux',
       path: 'redux',
     },
     {
-      name: 'udacity',
+      name: 'Udacity',
       path: 'udacity',
     },
   ],

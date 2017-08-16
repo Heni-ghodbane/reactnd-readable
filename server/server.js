@@ -16,8 +16,6 @@ app.use(cors());
 app.get('/', (req, res) => {
   const help = `
   <pre>
-    Welcome to the Udacity Readable API!
-
     Use an Authorization header to work with your own data:
 
     fetch(url, { headers: { 'Authorization': 'whatever-you-want' }})
@@ -302,5 +300,5 @@ app.delete('/comments/:id', (req, res) => {
 });
 
 app.listen(config.port, () => {
-  console.log('Server listening on port %s, Ctrl+C to stop', config.port);
+  console.log(`Server listening on ${config.origin}, Ctrl+C to stop`);
 });

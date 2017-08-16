@@ -1,21 +1,56 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+import PageHeader from 'react-bootstrap/lib/PageHeader';
+import Panel from 'react-bootstrap/lib/Panel';
+import Nav from 'react-bootstrap/lib/Nav';
+import NavItem from 'react-bootstrap/lib/NavItem';
+
+import { fetchCategories, selectedCategory } from '../actions';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchCategories();
+  }
+
+  handleSelect = selectedKey => {
+    this.props.selectedCategory(selectedKey);
+  };
+
+  renderCategories() {
+    const { categories: { data, selectedCategory } } = this.props;
+    const ALL_EVENT_KEY = 'All';
+    return (
+      <Nav
+        bsStyle="pills"
+        activeKey={selectedCategory ? selectedCategory : ALL_EVENT_KEY}
+        onSelect={this.handleSelect}
+      >
+        <NavItem eventKey={ALL_EVENT_KEY}>All Categories</NavItem>
+        {data &&
+          data.map(category =>
+            <NavItem eventKey={category.name} key={category.name}>
+              {category.name}
+            </NavItem>,
+          )}
+      </Nav>
+    );
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Panel>
+        <PageHeader>
+          Readable <small>A Content and Comment Web App</small>
+        </PageHeader>
+        {this.renderCategories()}
+      </Panel>
     );
   }
 }
 
-export default App;
+const mapStateToProps = ({ categories }) => ({ categories });
+
+export default connect(mapStateToProps, {
+  fetchCategories,
+  selectedCategory,
+})(App);
