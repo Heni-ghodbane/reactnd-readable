@@ -1,24 +1,11 @@
-import { RECEIVE_CATEGORIES, SELECTED_CATEGORY } from '../actions';
+import { RECEIVE_CATEGORIES } from '../actions';
 
-const initialState = {
-  categories: {
-    selectedCategory: 'All',
-    data: [],
-  },
-};
+const initialState = [];
 
 const categories = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_CATEGORIES:
-      return {
-        ...state,
-        data: [...action.categories],
-      };
-    case SELECTED_CATEGORY:
-      return {
-        ...state,
-        selectedCategory: action.selectedCategory,
-      };
+      return action.categories;
     default:
       return state;
   }

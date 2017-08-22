@@ -1,33 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
-import Panel from 'react-bootstrap/lib/Panel';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 
-import { fetchCategories, selectedCategory } from '../actions';
+import { fetchCategories, fetchPostsByCategory } from '../actions';
+import Posts from './Posts';
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchCategories();
+    this.handleSelect('All');
   }
 
   handleSelect = selectedKey => {
-    this.props.selectedCategory(selectedKey);
+    this.props.fetchPostsByCategory(selectedKey);
   };
 
   renderCategories() {
-    const { categories: { data, selectedCategory } } = this.props;
-    const ALL_EVENT_KEY = 'All';
+    const { categories, selectedCategory } = this.props;
     return (
       <Nav
         bsStyle="pills"
-        activeKey={selectedCategory ? selectedCategory : ALL_EVENT_KEY}
+        activeKey={selectedCategory ? selectedCategory : 'All'}
         onSelect={this.handleSelect}
       >
-        <NavItem eventKey={ALL_EVENT_KEY}>All Categories</NavItem>
-        {data &&
-          data.map(category =>
+        <NavItem eventKey="All">All Categories</NavItem>
+        {categories &&
+          categories.map(category =>
             <NavItem eventKey={category.name} key={category.name}>
               {category.name}
             </NavItem>,
@@ -38,19 +38,25 @@ class App extends Component {
 
   render() {
     return (
-      <Panel>
+      <div>
         <PageHeader>
           Readable <small>A Content and Comment Web App</small>
         </PageHeader>
         {this.renderCategories()}
-      </Panel>
+        <Posts />
+      </div>
     );
   }
 }
 
-const mapStateToProps = ({ categories }) => ({ categories });
+const mapStateToProps = state => {
+  return {
+    categories: state.categories,
+    selectedCategory: state.posts.category,
+  };
+};
 
 export default connect(mapStateToProps, {
   fetchCategories,
-  selectedCategory,
+  fetchPostsByCategory,
 })(App);
