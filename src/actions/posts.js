@@ -5,6 +5,7 @@ export const RECEIVE_POST = 'RECEIVE_POST';
 export const SET_ORDER_BY_POSTS = 'SET_ORDER_BY_POSTS';
 export const DELETED_POST = 'DELETED_POST';
 export const VOTED_ON_POST = 'VOTED_ON_POST';
+export const ADDED_POST = 'ADDED_POST';
 
 export const receivePosts = (category, posts) => ({
   type: RECEIVE_POSTS,
@@ -45,6 +46,11 @@ const voted = post => ({
   post,
 });
 
+const added = post => ({
+  type: ADDED_POST,
+  post,
+});
+
 export const fetchPostById = id => async dispatch => {
   const response = await PostsAPI.fetchPostById(id);
   const post = await response.json();
@@ -61,4 +67,10 @@ export const voteOnPost = (id, option) => async dispatch => {
   const response = await PostsAPI.vote(id, { option });
   const post = await response.json();
   dispatch(voted(post));
+};
+
+export const addPost = post => async dispatch => {
+  const response = await PostsAPI.add(post);
+  const newPost = await response.json();
+  dispatch(added(newPost));
 };

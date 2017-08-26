@@ -9,12 +9,14 @@ import PostsList from './PostsList';
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetchCategories();
-    this.handleSelect('All');
+    const { fetchCategories, selectedCategory } = this.props;
+    fetchCategories();
+    this.handleSelect(selectedCategory);
   }
 
   handleSelect = selectedKey => {
-    this.props.fetchPostsByCategory(selectedKey);
+    const category = selectedKey ? selectedKey : 'All';
+    this.props.fetchPostsByCategory(category);
   };
 
   renderCategories() {

@@ -9,7 +9,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import { fetchPostById } from '../actions';
+import { fetchPostById, deletePostById } from '../actions';
 import { formatTimestamp } from '../util/format';
 
 class PostDetail extends Component {
@@ -17,6 +17,11 @@ class PostDetail extends Component {
     const { fetchPostById, match } = this.props;
     fetchPostById(match.params.id);
   }
+
+  handleDelete = event => {
+    const { post, deletePostById } = this.props;
+    deletePostById(post.id);
+  };
 
   render() {
     const { post } = this.props;
@@ -85,14 +90,24 @@ class PostDetail extends Component {
                 </FormControl.Static>
               </Col>
             </FormGroup>
-            <ButtonToolbar>
-              <Link to="/">
-                <Button bsSize="large">Go Back</Button>
-              </Link>
-              <Link to={`/postedit/${post.id}`}>
-                <Button bsSize="large">Edit</Button>
-              </Link>
-            </ButtonToolbar>
+            <FormGroup controlId="fgButtons">
+              <Col componentClass={ControlLabel} sm={2}>
+                {' '}
+              </Col>
+              <Col>
+                <ButtonToolbar>
+                  <Link to="/">
+                    <Button>Go Back</Button>
+                  </Link>
+                  <Link to={`/postedit/${post.id}`}>
+                    <Button>Edit</Button>
+                  </Link>
+                  <Button bsStyle="danger" onClick={this.handleDelete}>
+                    Delete
+                  </Button>
+                </ButtonToolbar>
+              </Col>
+            </FormGroup>
           </Form>
         </div>
       );
@@ -108,4 +123,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { fetchPostById })(PostDetail);
+export default connect(mapStateToProps, { fetchPostById, deletePostById })(
+  PostDetail,
+);

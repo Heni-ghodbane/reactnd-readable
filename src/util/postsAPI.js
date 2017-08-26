@@ -49,3 +49,16 @@ export const vote = (id, option) => {
     body: JSON.stringify(option),
   });
 };
+
+export const add = post => {
+  return fetch(`${URL}/posts`, {
+    mode: 'cors',
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      accept: 'application/json',
+      authorization: 'Winston2017',
+    },
+    body: JSON.stringify(post),
+  });
+};

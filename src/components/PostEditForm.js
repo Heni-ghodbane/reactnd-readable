@@ -86,12 +86,19 @@ class PostEditForm extends Component {
                 </FormControl>
               </Col>
             </FormGroup>
-            <ButtonToolbar>
-              <Link to="/">
-                <Button bsSize="large">Cancel</Button>
-              </Link>
-              <Button bsSize="large">Save</Button>
-            </ButtonToolbar>
+            <FormGroup controlId="fgButtons">
+              <Col componentClass={ControlLabel} sm={2}>
+                {' '}
+              </Col>
+              <Col>
+                <ButtonToolbar>
+                  <Link to="/">
+                    <Button>Cancel</Button>
+                  </Link>
+                  <Button bsStyle="success">Save</Button>
+                </ButtonToolbar>
+              </Col>
+            </FormGroup>
           </Form>
         </div>
       );

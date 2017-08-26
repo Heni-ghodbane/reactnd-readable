@@ -11,6 +11,8 @@ import {
   DELETED_POST,
   voteOnPost,
   VOTED_ON_POST,
+  addPost,
+  ADDED_POST,
 } from './posts';
 
 export {
@@ -26,4 +28,6 @@ export {
   DELETED_POST,
   voteOnPost,
   VOTED_ON_POST,
+  addPost,
+  ADDED_POST,
 };
