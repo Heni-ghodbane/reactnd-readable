@@ -9,13 +9,13 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import Checkbox from 'react-bootstrap/lib/Checkbox';
 import Col from 'react-bootstrap/lib/Col';
 
-class AddPostForm extends Component {
+class PostAddForm extends Component {
   render() {
     return (
       <div>
         <PageHeader>Add Post Form</PageHeader>
         <Form horizontal>
-          <FormGroup controlId="formHorizontalEmail">
+          <FormGroup controlId="f">
             <Col componentClass={ControlLabel} sm={2}>
               Email
             </Col>
@@ -53,4 +53,4 @@ class AddPostForm extends Component {
   }
 }
 
-export default AddPostForm;
+export default PostAddForm;

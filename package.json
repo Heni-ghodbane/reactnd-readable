@@ -36,6 +36,7 @@
     "promise": "8.0.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
+    "react-bootstrap-counter": "^1.0.1",
     "react-dev-utils": "^3.1.0",
     "react-dom": "^15.6.1",
     "react-error-overlay": "^1.0.10",

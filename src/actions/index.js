@@ -5,6 +5,12 @@ import {
   fetchPostsByCategory,
   SET_ORDER_BY_POSTS,
   setOrderByPosts,
+  RECEIVE_POST,
+  fetchPostById,
+  deletePostById,
+  DELETED_POST,
+  voteOnPost,
+  VOTED_ON_POST,
 } from './posts';
 
 export {
@@ -14,4 +20,10 @@ export {
   fetchPostsByCategory,
   SET_ORDER_BY_POSTS,
   setOrderByPosts,
+  RECEIVE_POST,
+  fetchPostById,
+  deletePostById,
+  DELETED_POST,
+  voteOnPost,
+  VOTED_ON_POST,
 };

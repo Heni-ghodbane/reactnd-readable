@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 
 import { fetchCategories, fetchPostsByCategory } from '../actions';
-import Posts from './Posts';
+import PostsList from './PostsList';
 
 class App extends Component {
   componentDidMount() {
@@ -43,7 +43,7 @@ class App extends Component {
           Readable <small>A Content and Comment Web App</small>
         </PageHeader>
         {this.renderCategories()}
-        <Posts />
+        <PostsList />
       </div>
     );
   }

@@ -13,8 +13,16 @@ const defaultData = {
       path: 'redux',
     },
     {
-      name: 'Udacity',
-      path: 'udacity',
+      name: 'GraphQL',
+      path: 'graphql',
+    },
+    {
+      name: 'React-Router',
+      path: 'reactrouter',
+    },
+    {
+      name: 'MobX',
+      path: 'mobx',
     },
   ],
 };

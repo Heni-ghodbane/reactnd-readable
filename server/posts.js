@@ -23,6 +23,16 @@ const defaultData = {
     voteScore: -5,
     deleted: false,
   },
+  '6ni6ok3ym7mf1p33lXXX': {
+    id: '6ni6ok3ym7mf1p33lXXX',
+    timestamp: 1468479767190,
+    title: 'Learn Redux in 99 minutes!',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    author: 'thingone',
+    category: 'redux',
+    voteScore: -5,
+    deleted: false,
+  },
 };
 
 function getData(token) {
@@ -54,8 +64,8 @@ function get(token, id) {
 function getAll(token) {
   return new Promise(res => {
     const posts = getData(token);
-    let keys = Object.keys(posts);
-    let filtered_keys = keys.filter(key => !posts.deleted);
+    const keys = Object.keys(posts);
+    const filtered_keys = keys.filter(key => !posts[key].deleted);
     res(filtered_keys.map(key => posts[key]));
   });
 }

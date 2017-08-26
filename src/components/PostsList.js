@@ -14,20 +14,18 @@ import Form from 'react-bootstrap/lib/Form';
 import orderBy from 'lodash.orderby';
 
 import { setOrderByPosts } from '../actions';
-import Post from './Post';
+import PostListItem from './PostListItem';
 
 const tableHeadings = [
-  'Id',
-  'Author',
-  'Category',
-  'Deleted',
   'Title',
-  'Timestamp',
-  'Vote Score',
   'Body',
+  'Author',
+  'Date',
+  'Vote Score',
+  'Actions',
 ];
 
-class Posts extends Component {
+class PostsList extends Component {
   state = {
     value: 1,
   };
@@ -55,7 +53,7 @@ class Posts extends Component {
                     onChange={this.handleChange}
                   >
                     <option value="voteCount">Vote Count</option>
-                    <option value="timestamp">Timestamp</option>
+                    <option value="timestamp">Date</option>
                   </FormControl>
                 </FormGroup>
                 <Link to="/addpost">
@@ -70,7 +68,7 @@ class Posts extends Component {
         </Grid>
         <div />
         <div style={{ margin: 10 }}>
-          <Table striped bordered hover>
+          <Table condensed bordered hover>
             <thead>
               <tr>
                 {tableHeadings.map(th =>
@@ -81,7 +79,7 @@ class Posts extends Component {
               </tr>
             </thead>
             <tbody>
-              {posts.map(post => <Post key={post.id} post={post} />)}
+              {posts.map(post => <PostListItem key={post.id} post={post} />)}
             </tbody>
           </Table>
         </div>
@@ -104,4 +102,4 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   setOrderByPosts,
-})(Posts);
+})(PostsList);
