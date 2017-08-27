@@ -6,6 +6,14 @@ export const SET_ORDER_BY_POSTS = 'SET_ORDER_BY_POSTS';
 export const DELETED_POST = 'DELETED_POST';
 export const VOTED_ON_POST = 'VOTED_ON_POST';
 export const ADDED_POST = 'ADDED_POST';
+export const NEW_POST = 'NEW_POST';
+export const EDITED_POST = 'EDITED_POST';
+export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
+export const ADDED_COMMENT = 'ADDED_COMMENT';
+export const DELETED_COMMENT = 'DELETED_COMMENT';
+export const RECEIVE_COMMENT = 'RECEIVE_COMMENT';
+export const VOTED_ON_COMMENT = 'VOTED_ON_COMMENT';
+export const EDITED_COMMENT = 'EDITED_COMMENT';
 
 export const receivePosts = (category, posts) => ({
   type: RECEIVE_POSTS,
@@ -18,7 +26,7 @@ export const receivePosts = (category, posts) => ({
 export const fetchPostsByCategory = category => async dispatch => {
   // Pass in null for all categories
   let filterByCategory = null;
-  if (category !== 'All') {
+  if (category !== 'all') {
     filterByCategory = category.toLowerCase();
   }
   const response = await PostsAPI.fetchPostsByCategory(filterByCategory);
@@ -51,6 +59,41 @@ const added = post => ({
   post,
 });
 
+const edited = post => ({
+  type: EDITED_POST,
+  post,
+});
+
+const receiveComments = comments => ({
+  type: RECEIVE_COMMENTS,
+  comments,
+});
+
+const addedComment = comment => ({
+  type: ADDED_COMMENT,
+  comment,
+});
+
+const deletedComment = comment => ({
+  type: DELETED_COMMENT,
+  comment,
+});
+
+const receiveComment = comment => ({
+  type: RECEIVE_COMMENT,
+  comment,
+});
+
+const votedOnComment = comment => ({
+  type: VOTED_ON_COMMENT,
+  comment,
+});
+
+const editedComment = comment => ({
+  type: EDITED_COMMENT,
+  comment,
+});
+
 export const fetchPostById = id => async dispatch => {
   const response = await PostsAPI.fetchPostById(id);
   const post = await response.json();
@@ -73,4 +116,46 @@ export const addPost = post => async dispatch => {
   const response = await PostsAPI.add(post);
   const newPost = await response.json();
   dispatch(added(newPost));
+};
+
+export const editPost = post => async dispatch => {
+  const response = await PostsAPI.edit(post);
+  const updatedPost = await response.json();
+  dispatch(edited(updatedPost));
+};
+
+export const fetchPostComments = postId => async dispatch => {
+  const response = await PostsAPI.fetchComments(postId);
+  const comments = await response.json();
+  dispatch(receiveComments(comments));
+};
+
+export const addComment = comment => async dispatch => {
+  const response = await PostsAPI.addComment(comment);
+  const newComment = await response.json();
+  dispatch(addedComment(newComment));
+};
+
+export const deleteComment = commentId => async dispatch => {
+  const response = await PostsAPI.deleteComment(commentId);
+  const comment = await response.json();
+  dispatch(deletedComment(comment));
+};
+
+export const fetchComment = id => async dispatch => {
+  const response = await PostsAPI.fetchComment(id);
+  const comment = await response.json();
+  dispatch(receiveComment(comment));
+};
+
+export const voteOnComment = (id, option) => async dispatch => {
+  const response = await PostsAPI.voteOnComment(id, { option });
+  const comments = await response.json();
+  dispatch(votedOnComment(comments));
+};
+
+export const editComment = comment => async dispatch => {
+  const response = await PostsAPI.editComment(comment);
+  const updatedComment = await response.json();
+  dispatch(editedComment(updatedComment));
 };

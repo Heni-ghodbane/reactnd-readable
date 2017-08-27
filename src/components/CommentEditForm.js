@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import Button from 'react-bootstrap/lib/Button';
@@ -10,23 +10,22 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
-import { fetchPostById, editPost } from '../actions';
+import { fetchComment, editComment } from '../actions';
 
-class PostEditForm extends Component {
+class CommentEditForm extends Component {
   state = {
-    title: '',
     body: '',
   };
 
   componentDidMount() {
-    const { fetchPostById, match } = this.props;
-    fetchPostById(match.params.id);
+    const { fetchComment, match } = this.props;
+    fetchComment(match.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { post } = nextProps;
+    const { comment } = nextProps;
     this.setState({
-      ...post,
+      body: comment.body,
     });
   }
 
@@ -36,34 +35,22 @@ class PostEditForm extends Component {
   };
 
   handleSave = () => {
-    const { post, editPost, history } = this.props;
-    const updatedPost = {
-      ...post,
+    const { comment, editComment, history } = this.props;
+    const updatedComment = {
+      ...comment,
       ...this.state,
     };
-    editPost(updatedPost);
-    history.replace('/');
+    editComment(updatedComment);
+    history.goBack();
   };
 
   render() {
-    const { post } = this.props;
-    if (post) {
+    const { comment } = this.props;
+    if (comment) {
       return (
         <div>
-          <PageHeader>Post Edit Form</PageHeader>
+          <PageHeader>Comment Edit Form</PageHeader>
           <Form horizontal>
-            <FormGroup controlId="title">
-              <Col componentClass={ControlLabel} sm={2}>
-                Title
-              </Col>
-              <Col sm={10}>
-                <FormControl
-                  type="text"
-                  value={this.state.title}
-                  onChange={this.handleChange}
-                />
-              </Col>
-            </FormGroup>
             <FormGroup controlId="body">
               <Col componentClass={ControlLabel} sm={2}>
                 Body
@@ -82,7 +69,7 @@ class PostEditForm extends Component {
               </Col>
               <Col>
                 <ButtonToolbar>
-                  <Link to="/">
+                  <Link to={`/postdetail/${comment.parentId}`}>
                     <Button>Cancel</Button>
                   </Link>
                   <Button bsStyle="success" onClick={this.handleSave}>
@@ -102,10 +89,9 @@ class PostEditForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    post: state.posts.currentPost,
+    comment: state.posts.currentComment,
   };
 };
-
-export default connect(mapStateToProps, { fetchPostById, editPost })(
-  PostEditForm,
+export default connect(mapStateToProps, { fetchComment, editComment })(
+  CommentEditForm,
 );

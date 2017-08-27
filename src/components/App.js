@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   handleSelect = selectedKey => {
-    const category = selectedKey ? selectedKey : 'All';
+    const category = selectedKey ? selectedKey : 'all';
     this.props.fetchPostsByCategory(category);
   };
 
@@ -24,13 +24,13 @@ class App extends Component {
     return (
       <Nav
         bsStyle="pills"
-        activeKey={selectedCategory ? selectedCategory : 'All'}
+        activeKey={selectedCategory ? selectedCategory : 'all'}
         onSelect={this.handleSelect}
       >
-        <NavItem eventKey="All">All Categories</NavItem>
+        <NavItem eventKey="all">All Categories</NavItem>
         {categories &&
           categories.map(category =>
-            <NavItem eventKey={category.name} key={category.name}>
+            <NavItem eventKey={category.path} key={category.path}>
               {category.name}
             </NavItem>,
           )}

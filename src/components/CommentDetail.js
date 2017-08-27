@@ -9,49 +9,35 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import { fetchPostById, deletePostById } from '../actions';
+import { fetchComment, deleteComment } from '../actions';
 import { formatTimestamp } from '../util/format';
-import CommentsList from './CommentsList';
 
-class PostDetail extends Component {
+class CommentDetail extends Component {
   componentDidMount() {
-    const { fetchPostById, match, post } = this.props;
-    console.log(match, post);
-    if (!post || post.id !== match.params.id) {
-      fetchPostById(match.params.id);
-    }
+    const { fetchComment, match } = this.props;
+    fetchComment(match.params.id);
   }
 
-  handleDelete = event => {
-    const { post, deletePostById, history } = this.props;
-    deletePostById(post.id);
-    history.replace('/');
+  handleDelete = () => {
+    const { comment, deleteComment, history } = this.props;
+    deleteComment(comment.id);
+    history.goBack();
   };
 
   render() {
-    const { post } = this.props;
-    if (post) {
+    const { comment } = this.props;
+    if (comment) {
       return (
         <div>
-          <PageHeader>Post Detail</PageHeader>
+          <PageHeader>Comment Detail</PageHeader>
           <Form horizontal>
-            <FormGroup controlId="fgTitle">
-              <Col componentClass={ControlLabel} sm={2}>
-                Title
-              </Col>
-              <Col sm={10}>
-                <FormControl.Static>
-                  {post.title}
-                </FormControl.Static>
-              </Col>
-            </FormGroup>
             <FormGroup controlId="fgBody">
               <Col componentClass={ControlLabel} sm={2}>
                 Body
               </Col>
               <Col sm={10}>
                 <FormControl.Static>
-                  {post.body}
+                  {comment.body}
                 </FormControl.Static>
               </Col>
             </FormGroup>
@@ -61,7 +47,7 @@ class PostDetail extends Component {
               </Col>
               <Col sm={10}>
                 <FormControl.Static>
-                  {post.author}
+                  {comment.author}
                 </FormControl.Static>
               </Col>
             </FormGroup>
@@ -71,7 +57,7 @@ class PostDetail extends Component {
               </Col>
               <Col sm={10}>
                 <FormControl.Static>
-                  {formatTimestamp(post.timestamp)}
+                  {formatTimestamp(comment.timestamp)}
                 </FormControl.Static>
               </Col>
             </FormGroup>
@@ -81,17 +67,7 @@ class PostDetail extends Component {
               </Col>
               <Col sm={10}>
                 <FormControl.Static>
-                  {post.voteScore}
-                </FormControl.Static>
-              </Col>
-            </FormGroup>
-            <FormGroup controlId="fgCategory">
-              <Col componentClass={ControlLabel} sm={2}>
-                Category
-              </Col>
-              <Col sm={10}>
-                <FormControl.Static>
-                  {post.category}
+                  {comment.voteScore}
                 </FormControl.Static>
               </Col>
             </FormGroup>
@@ -101,10 +77,10 @@ class PostDetail extends Component {
               </Col>
               <Col>
                 <ButtonToolbar>
-                  <Link to="/">
+                  <Link to={`/postdetail/${comment.parentId}`}>
                     <Button>Go Back</Button>
                   </Link>
-                  <Link to={`/postedit/${post.id}`}>
+                  <Link to={`/commentedit/${comment.id}`}>
                     <Button>Edit</Button>
                   </Link>
                   <Button bsStyle="danger" onClick={this.handleDelete}>
@@ -114,9 +90,6 @@ class PostDetail extends Component {
               </Col>
             </FormGroup>
           </Form>
-          <PageHeader />
-          <h3>Comments</h3>
-          <CommentsList post={post} />
         </div>
       );
     } else {
@@ -128,10 +101,10 @@ class PostDetail extends Component {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    post: state.posts.currentPost,
+    comment: state.posts.currentComment,
   };
 };
 
-export default connect(mapStateToProps, { fetchPostById, deletePostById })(
-  PostDetail,
+export default connect(mapStateToProps, { fetchComment, deleteComment })(
+  CommentDetail,
 );

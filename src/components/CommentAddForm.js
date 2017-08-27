@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import Button from 'react-bootstrap/lib/Button';
@@ -11,11 +10,10 @@ import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import uuidv4 from 'uuid/v4';
 
-import { addPost } from '../actions';
+import { addComment } from '../actions';
 
-class PostAddForm extends Component {
+class CommentAddForm extends Component {
   state = {
-    category: '',
     title: '',
     body: '',
     author: '',
@@ -26,22 +24,25 @@ class PostAddForm extends Component {
     this.setState({ [id]: value });
   };
 
+  handleCancel = () => {
+    this.props.history.goBack();
+  };
+
   handleSave = () => {
-    const post = {
+    const comment = {
       ...this.state,
       id: uuidv4(),
+      parentId: this.props.post.id,
       timestamp: Date.now(),
-      category: this.state.category.toLowerCase(),
     };
-    this.props.addPost(post);
-    this.props.history.replace('/');
+    this.props.addComment(comment);
+    this.props.history.goBack();
   };
 
   render() {
-    const { categories } = this.props;
     return (
       <div>
-        <PageHeader>Post Add Form</PageHeader>
+        <PageHeader>Comment Add Form</PageHeader>
         <Form horizontal>
           <FormGroup controlId="title">
             <Col componentClass={ControlLabel} sm={2}>
@@ -67,25 +68,6 @@ class PostAddForm extends Component {
               />
             </Col>
           </FormGroup>
-          <FormGroup controlId="category">
-            <Col componentClass={ControlLabel} sm={2}>
-              Category
-            </Col>
-            <Col sm={5}>
-              <FormControl
-                componentClass="select"
-                placeholder="Category"
-                value={this.state.category}
-                onChange={this.handleChange}
-              >
-                {categories.map(category =>
-                  <option key={category.path} value={category.path}>
-                    {category.name}
-                  </option>,
-                )}
-              </FormControl>
-            </Col>
-          </FormGroup>
           <FormGroup controlId="author">
             <Col componentClass={ControlLabel} sm={2}>
               Author
@@ -104,9 +86,9 @@ class PostAddForm extends Component {
             </Col>
             <Col>
               <ButtonToolbar>
-                <Link to="/">
-                  <Button bsSize="large">Cancel</Button>
-                </Link>
+                <Button bsSize="large" onClick={this.handleCancel}>
+                  Cancel
+                </Button>
                 <Button
                   bsSize="large"
                   bsStyle="success"
@@ -124,9 +106,10 @@ class PostAddForm extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
-    categories: state.categories,
+    post: state.posts.currentPost,
   };
 };
 
-export default connect(mapStateToProps, { addPost })(PostAddForm);
+export default connect(mapStateToProps, { addComment })(CommentAddForm);
