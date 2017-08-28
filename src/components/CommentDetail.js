@@ -10,7 +10,7 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import { fetchComment, deleteComment } from '../actions';
-import { formatTimestamp } from '../util/format';
+import { formatTimestamp } from '../util/formatters';
 
 class CommentDetail extends Component {
   componentDidMount() {

@@ -4,6 +4,7 @@ import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 
+import { AllCategories } from '../constants';
 import { fetchCategories, fetchPostsByCategory } from '../actions';
 import PostsList from './PostsList';
 
@@ -15,7 +16,7 @@ class App extends Component {
   }
 
   handleSelect = selectedKey => {
-    const category = selectedKey ? selectedKey : 'all';
+    const category = selectedKey ? selectedKey : AllCategories.path;
     this.props.fetchPostsByCategory(category);
   };
 
@@ -24,10 +25,12 @@ class App extends Component {
     return (
       <Nav
         bsStyle="pills"
-        activeKey={selectedCategory ? selectedCategory : 'all'}
+        activeKey={selectedCategory ? selectedCategory : AllCategories.path}
         onSelect={this.handleSelect}
       >
-        <NavItem eventKey="all">All Categories</NavItem>
+        <NavItem eventKey={AllCategories.path}>
+          {AllCategories.name}
+        </NavItem>
         {categories &&
           categories.map(category =>
             <NavItem eventKey={category.path} key={category.path}>

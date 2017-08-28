@@ -55,7 +55,7 @@ class CommentsList extends Component {
                   </FormControl>
                 </FormGroup>
                 <Link to="/addcomment">
-                  <Button bsStyle="primary" style={{ margin: 10 }}>
+                  <Button bsStyle="primary" className="add-comment-button">
                     <Glyphicon glyph="plus" /> Add Comment
                   </Button>
                 </Link>
@@ -64,7 +64,7 @@ class CommentsList extends Component {
           </Row>
         </Grid>
         <div />
-        <div style={{ margin: 10 }}>
+        <div className="comments-table">
           <Table condensed bordered hover>
             <thead>
               <tr>

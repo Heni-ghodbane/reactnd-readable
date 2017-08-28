@@ -1,3 +1,32 @@
 body {
   margin: 10px;
 }
+
+.vote-score {
+  text-align: 'center';
+}
+
+.vote-score span {
+  float: 'right';
+  margin: 5px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.add-post-button {
+  margin: 10px;
+}
+
+.posts-table {
+  margin: 10px;
+}
+
+.add-comment-button {
+  margin: 10px;
+}
+
+.comments-table {
+  margin: 10px;
+}

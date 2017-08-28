@@ -10,7 +10,7 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import { fetchPostById, deletePostById } from '../actions';
-import { formatTimestamp } from '../util/format';
+import { formatTimestamp } from '../util/formatters';
 import CommentsList from './CommentsList';
 
 class PostDetail extends Component {

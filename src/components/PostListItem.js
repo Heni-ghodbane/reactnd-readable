@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
-import { formatTimestamp } from '../util/format';
+import { formatTimestamp } from '../util/formatters';
 import { deletePostById, voteOnPost } from '../actions';
 
 class PostListItem extends PureComponent {
@@ -41,14 +41,9 @@ class PostListItem extends PureComponent {
           {formatTimestamp(post.timestamp)}
         </td>
         <td>
-          <div style={{ textAlign: 'center' }}>
+          <div className="vote-score">
             {post.voteScore}{' '}
-            <span
-              style={{
-                float: 'right',
-                margin: 5,
-              }}
-            >
+            <span>
               <Button
                 bsSize="xsmall"
                 bsStyle="success"
@@ -69,7 +64,7 @@ class PostListItem extends PureComponent {
         <td>
           <Link to={`/postdetail/${post.id}`}>View</Link>{' '}
           <Link to={`/postedit/${post.id}`}>Edit</Link>{' '}
-          <a style={{ cursor: 'pointer' }} onClick={this.handleDelete}>
+          <a className="cursor-pointer" onClick={this.handleDelete}>
             Delete
           </a>
         </td>

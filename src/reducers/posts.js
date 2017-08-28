@@ -1,3 +1,5 @@
+import { AllCategories } from '../constants';
+
 import {
   RECEIVE_POSTS,
   SET_ORDER_BY_POSTS,
@@ -18,7 +20,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  category: 'all',
+  category: AllCategories.path,
   orderBy: 'voteCount',
   data: [],
   currentPost: null,

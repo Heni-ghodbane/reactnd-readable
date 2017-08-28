@@ -47,7 +47,7 @@ class PostsList extends Component {
                   </FormControl>
                 </FormGroup>
                 <Link to="/addpost">
-                  <Button bsStyle="primary" style={{ margin: 10 }}>
+                  <Button bsStyle="primary" className="add-post-button">
                     <Glyphicon glyph="plus" /> Add Post
                   </Button>
                 </Link>
@@ -56,7 +56,7 @@ class PostsList extends Component {
           </Row>
         </Grid>
         <div />
-        <div style={{ margin: 10 }}>
+        <div className="posts-table">
           <Table condensed bordered hover>
             <thead>
               <tr>
