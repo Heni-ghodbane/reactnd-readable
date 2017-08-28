@@ -29,6 +29,10 @@ import {
   EDITED_COMMENT,
   SET_ORDER_BY_COMMENTS,
   setOrderByComments,
+  SET_WORKING_POST,
+  setWorkingPost,
+  SET_WORKING_COMMENT,
+  setWorkingComment,
 } from './posts';
 
 export {
@@ -62,4 +66,8 @@ export {
   EDITED_COMMENT,
   SET_ORDER_BY_COMMENTS,
   setOrderByComments,
+  SET_WORKING_POST,
+  setWorkingPost,
+  SET_WORKING_COMMENT,
+  setWorkingComment,
 };

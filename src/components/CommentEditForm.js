@@ -10,43 +10,39 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
-import { fetchComment, editComment } from '../actions';
+import { fetchComment, editComment, setWorkingComment } from '../actions';
 
 class CommentEditForm extends Component {
-  state = {
-    body: '',
-  };
-
   componentDidMount() {
     const { fetchComment, match } = this.props;
     fetchComment(match.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { comment } = nextProps;
-    this.setState({
-      body: comment.body,
-    });
+    const { comment, isEditing, workingComment } = nextProps;
+    if (!isEditing) {
+      workingComment.body = comment.body;
+    }
   }
 
   handleChange = event => {
     const { id, value } = event.target;
-    this.setState({ [id]: value });
+    this.props.setWorkingComment({ [id]: value });
   };
 
   handleSave = () => {
-    const { comment, editComment, history } = this.props;
+    const { comment, editComment, history, workingComment } = this.props;
     const updatedComment = {
       ...comment,
-      ...this.state,
+      ...workingComment,
     };
     editComment(updatedComment);
     history.goBack();
   };
 
   render() {
-    const { comment } = this.props;
-    if (comment) {
+    const { comment, workingComment } = this.props;
+    if (workingComment) {
       return (
         <div>
           <PageHeader>Comment Edit Form</PageHeader>
@@ -58,7 +54,7 @@ class CommentEditForm extends Component {
               <Col sm={10}>
                 <FormControl
                   componentClass="textarea"
-                  value={this.state.body}
+                  value={workingComment.body}
                   onChange={this.handleChange}
                 />
               </Col>
@@ -90,8 +86,12 @@ class CommentEditForm extends Component {
 const mapStateToProps = state => {
   return {
     comment: state.posts.currentComment,
+    workingComment: state.posts.workingComment,
+    isEditing: state.posts.isEditing,
   };
 };
-export default connect(mapStateToProps, { fetchComment, editComment })(
-  CommentEditForm,
-);
+export default connect(mapStateToProps, {
+  fetchComment,
+  editComment,
+  setWorkingComment,
+})(CommentEditForm);

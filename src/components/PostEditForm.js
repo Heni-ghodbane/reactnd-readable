@@ -10,44 +10,40 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
-import { fetchPostById, editPost } from '../actions';
+import { fetchPostById, editPost, setWorkingPost } from '../actions';
 
 class PostEditForm extends Component {
-  state = {
-    title: '',
-    body: '',
-  };
-
   componentDidMount() {
     const { fetchPostById, match } = this.props;
     fetchPostById(match.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { post } = nextProps;
-    this.setState({
-      ...post,
-    });
+    const { post, workingPost, isEditing } = nextProps;
+    if (!isEditing) {
+      workingPost.title = post.title;
+      workingPost.body = post.body;
+    }
   }
 
   handleChange = event => {
     const { id, value } = event.target;
-    this.setState({ [id]: value });
+    this.props.setWorkingPost({ [id]: value });
   };
 
   handleSave = () => {
-    const { post, editPost, history } = this.props;
+    const { post, editPost, history, workingPost } = this.props;
     const updatedPost = {
       ...post,
-      ...this.state,
+      ...workingPost,
     };
     editPost(updatedPost);
     history.replace('/');
   };
 
   render() {
-    const { post } = this.props;
-    if (post) {
+    const { workingPost } = this.props;
+    if (workingPost) {
       return (
         <div>
           <PageHeader>Post Edit Form</PageHeader>
@@ -59,7 +55,7 @@ class PostEditForm extends Component {
               <Col sm={10}>
                 <FormControl
                   type="text"
-                  value={this.state.title}
+                  value={workingPost.title}
                   onChange={this.handleChange}
                 />
               </Col>
@@ -71,7 +67,7 @@ class PostEditForm extends Component {
               <Col sm={10}>
                 <FormControl
                   componentClass="textarea"
-                  value={this.state.body}
+                  value={workingPost.body}
                   onChange={this.handleChange}
                 />
               </Col>
@@ -103,9 +99,13 @@ class PostEditForm extends Component {
 const mapStateToProps = state => {
   return {
     post: state.posts.currentPost,
+    workingPost: state.posts.workingPost,
+    isEditing: state.posts.isEditing,
   };
 };
 
-export default connect(mapStateToProps, { fetchPostById, editPost })(
-  PostEditForm,
-);
+export default connect(mapStateToProps, {
+  fetchPostById,
+  editPost,
+  setWorkingPost,
+})(PostEditForm);

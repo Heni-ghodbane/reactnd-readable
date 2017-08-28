@@ -13,6 +13,8 @@ import {
   VOTED_ON_COMMENT,
   EDITED_COMMENT,
   SET_ORDER_BY_COMMENTS,
+  SET_WORKING_POST,
+  SET_WORKING_COMMENT,
 } from '../actions';
 
 const initialState = {
@@ -23,6 +25,18 @@ const initialState = {
   comments: [],
   currentComment: null,
   commentsOrderBy: 'voteCount',
+  workingPost: {
+    category: '',
+    title: '',
+    body: '',
+    author: '',
+  },
+  isEditing: false,
+  workingComment: {
+    title: '',
+    body: '',
+    author: '',
+  },
 };
 
 const posts = (state = initialState, action) => {
@@ -47,6 +61,13 @@ const posts = (state = initialState, action) => {
         currentPost: action.post,
         comments: [],
         currentComment: null,
+        isEditing: false,
+        workingPost: {
+          category: '',
+          title: '',
+          body: '',
+          author: '',
+        },
       };
     case DELETED_POST:
       return {
@@ -64,9 +85,26 @@ const posts = (state = initialState, action) => {
         ),
       };
     case ADDED_POST:
-      return state;
+      return {
+        ...state,
+        workingPost: {
+          category: '',
+          title: '',
+          body: '',
+          author: '',
+        },
+      };
     case EDITED_POST:
-      return state;
+      return {
+        ...state,
+        workingPost: {
+          category: '',
+          title: '',
+          body: '',
+          author: '',
+        },
+        isEditing: false,
+      };
     case RECEIVE_COMMENTS:
       return {
         ...state,
@@ -77,6 +115,11 @@ const posts = (state = initialState, action) => {
       return {
         ...state,
         comments: [...state.comments, action.comment],
+        workingComment: {
+          title: '',
+          body: '',
+          author: '',
+        },
       };
     case DELETED_COMMENT:
       return {
@@ -90,6 +133,12 @@ const posts = (state = initialState, action) => {
       return {
         ...state,
         currentComment: action.comment,
+        isEditing: false,
+        workingComment: {
+          title: '',
+          body: '',
+          author: '',
+        },
       };
     case VOTED_ON_COMMENT:
       return {
@@ -100,11 +149,31 @@ const posts = (state = initialState, action) => {
         ),
       };
     case EDITED_COMMENT:
-      return state;
+      return {
+        ...state,
+        isEditing: false,
+        workingComment: {
+          title: '',
+          body: '',
+          author: '',
+        },
+      };
     case SET_ORDER_BY_COMMENTS:
       return {
         ...state,
         commentsOrderBy: action.orderBy,
+      };
+    case SET_WORKING_POST:
+      return {
+        ...state,
+        workingPost: { ...state.workingPost, ...action.post },
+        isEditing: true,
+      };
+    case SET_WORKING_COMMENT:
+      return {
+        ...state,
+        workingComment: { ...state.workingComment, ...action.comment },
+        isEditing: true,
       };
     default:
       return state;

@@ -38,7 +38,7 @@ class CommentListItem extends PureComponent {
           {formatTimestamp(comment.timestamp)}
         </td>
         <td>
-          <div style={{ 'text-align': 'center' }}>
+          <div style={{ textAlign: 'center' }}>
             {comment.voteScore}{' '}
             <span
               style={{
@@ -66,7 +66,7 @@ class CommentListItem extends PureComponent {
         <td>
           <Link to={`/commentdetail/${comment.id}`}>View</Link>{' '}
           <Link to={`/commentedit/${comment.id}`}>Edit </Link>{' '}
-          <a bstyle={{ cursor: 'pointer' }} onClick={this.handleDelete}>
+          <a style={{ cursor: 'pointer' }} onClick={this.handleDelete}>
             Delete
           </a>
         </td>

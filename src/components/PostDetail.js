@@ -16,7 +16,6 @@ import CommentsList from './CommentsList';
 class PostDetail extends Component {
   componentDidMount() {
     const { fetchPostById, match, post } = this.props;
-    console.log(match, post);
     if (!post || post.id !== match.params.id) {
       fetchPostById(match.params.id);
     }
@@ -125,7 +124,6 @@ class PostDetail extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     post: state.posts.currentPost,
   };

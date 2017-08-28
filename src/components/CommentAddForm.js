@@ -10,18 +10,12 @@ import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import uuidv4 from 'uuid/v4';
 
-import { addComment } from '../actions';
+import { addComment, setWorkingComment } from '../actions';
 
 class CommentAddForm extends Component {
-  state = {
-    title: '',
-    body: '',
-    author: '',
-  };
-
   handleChange = event => {
     const { id, value } = event.target;
-    this.setState({ [id]: value });
+    this.props.setWorkingComment({ [id]: value });
   };
 
   handleCancel = () => {
@@ -29,8 +23,9 @@ class CommentAddForm extends Component {
   };
 
   handleSave = () => {
+    const { workingComment } = this.props;
     const comment = {
-      ...this.state,
+      ...workingComment,
       id: uuidv4(),
       parentId: this.props.post.id,
       timestamp: Date.now(),
@@ -40,6 +35,7 @@ class CommentAddForm extends Component {
   };
 
   render() {
+    const { workingComment } = this.props;
     return (
       <div>
         <PageHeader>Comment Add Form</PageHeader>
@@ -51,7 +47,7 @@ class CommentAddForm extends Component {
             <Col sm={10}>
               <FormControl
                 type="text"
-                value={this.state.title}
+                value={workingComment.title}
                 onChange={this.handleChange}
               />
             </Col>
@@ -63,7 +59,7 @@ class CommentAddForm extends Component {
             <Col sm={10}>
               <FormControl
                 componentClass="textarea"
-                value={this.state.body}
+                value={workingComment.body}
                 onChange={this.handleChange}
               />
             </Col>
@@ -75,7 +71,7 @@ class CommentAddForm extends Component {
             <Col sm={10}>
               <FormControl
                 type="text"
-                value={this.state.author}
+                value={workingComment.author}
                 onChange={this.handleChange}
               />
             </Col>
@@ -106,10 +102,12 @@ class CommentAddForm extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     post: state.posts.currentPost,
+    workingComment: state.posts.workingComment,
   };
 };
 
-export default connect(mapStateToProps, { addComment })(CommentAddForm);
+export default connect(mapStateToProps, { addComment, setWorkingComment })(
+  CommentAddForm,
+);

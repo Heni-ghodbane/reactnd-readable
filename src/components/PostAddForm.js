@@ -11,34 +11,28 @@ import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import uuidv4 from 'uuid/v4';
 
-import { addPost } from '../actions';
+import { addPost, setWorkingPost } from '../actions';
 
 class PostAddForm extends Component {
-  state = {
-    category: '',
-    title: '',
-    body: '',
-    author: '',
-  };
-
   handleChange = event => {
     const { id, value } = event.target;
-    this.setState({ [id]: value });
+    this.props.setWorkingPost({ [id]: value });
   };
 
   handleSave = () => {
+    const { workingPost } = this.props;
     const post = {
-      ...this.state,
+      ...workingPost,
       id: uuidv4(),
       timestamp: Date.now(),
-      category: this.state.category.toLowerCase(),
+      category: workingPost.category.toLowerCase(),
     };
     this.props.addPost(post);
     this.props.history.replace('/');
   };
 
   render() {
-    const { categories } = this.props;
+    const { categories, workingPost } = this.props;
     return (
       <div>
         <PageHeader>Post Add Form</PageHeader>
@@ -50,7 +44,7 @@ class PostAddForm extends Component {
             <Col sm={10}>
               <FormControl
                 type="text"
-                value={this.state.title}
+                value={workingPost.title}
                 onChange={this.handleChange}
               />
             </Col>
@@ -62,7 +56,7 @@ class PostAddForm extends Component {
             <Col sm={10}>
               <FormControl
                 componentClass="textarea"
-                value={this.state.body}
+                value={workingPost.body}
                 onChange={this.handleChange}
               />
             </Col>
@@ -75,7 +69,7 @@ class PostAddForm extends Component {
               <FormControl
                 componentClass="select"
                 placeholder="Category"
-                value={this.state.category}
+                value={workingPost.category}
                 onChange={this.handleChange}
               >
                 {categories.map(category =>
@@ -93,7 +87,7 @@ class PostAddForm extends Component {
             <Col sm={10}>
               <FormControl
                 type="text"
-                value={this.state.author}
+                value={workingPost.author}
                 onChange={this.handleChange}
               />
             </Col>
@@ -126,7 +120,10 @@ class PostAddForm extends Component {
 const mapStateToProps = state => {
   return {
     categories: state.categories,
+    workingPost: state.posts.workingPost,
   };
 };
 
-export default connect(mapStateToProps, { addPost })(PostAddForm);
+export default connect(mapStateToProps, { addPost, setWorkingPost })(
+  PostAddForm,
+);

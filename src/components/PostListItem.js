@@ -41,7 +41,7 @@ class PostListItem extends PureComponent {
           {formatTimestamp(post.timestamp)}
         </td>
         <td>
-          <div style={{ 'text-align': 'center' }}>
+          <div style={{ textAlign: 'center' }}>
             {post.voteScore}{' '}
             <span
               style={{

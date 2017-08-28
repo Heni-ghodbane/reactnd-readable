@@ -99,7 +99,6 @@ class CommentDetail extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     comment: state.posts.currentComment,
   };
