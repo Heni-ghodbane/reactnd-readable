@@ -6,7 +6,7 @@ This is a content and comment web app. Users are able to post content to predefi
 This content and comment structure is common across a large number of websites and applications, from news sites to blogs to aggregators like Hacker News and Reddit. 
 
 ## Getting started
-To run application, run
+To run the application
 ```bash
 yarn install
 ```
