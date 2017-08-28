@@ -1,3 +1,3 @@
 export function formatTimestamp(timestamp) {
-  return new Date(timestamp * 1000).toLocaleDateString();
+  return new Date(timestamp).toLocaleDateString();
 }

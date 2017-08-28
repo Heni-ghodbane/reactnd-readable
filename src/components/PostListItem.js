@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
@@ -42,44 +41,37 @@ class PostListItem extends PureComponent {
           {formatTimestamp(post.timestamp)}
         </td>
         <td>
-          {post.voteScore}
-          <ButtonToolbar>
-            <Button
-              bsSize="xsmall"
-              bsStyle="success"
-              onClick={this.handleUpVote}
+          <div style={{ 'text-align': 'center' }}>
+            {post.voteScore}{' '}
+            <span
+              style={{
+                float: 'right',
+                margin: 5,
+              }}
             >
-              <Glyphicon glyph="plus" />
-            </Button>
-            <Button
-              bsSize="xsmall"
-              bsStyle="danger"
-              onClick={this.handleDownVote}
-            >
-              <Glyphicon glyph="minus" />
-            </Button>
-          </ButtonToolbar>
+              <Button
+                bsSize="xsmall"
+                bsStyle="success"
+                onClick={this.handleUpVote}
+              >
+                <Glyphicon glyph="thumbs-up" />
+              </Button>{' '}
+              <Button
+                bsSize="xsmall"
+                bsStyle="danger"
+                onClick={this.handleDownVote}
+              >
+                <Glyphicon glyph="thumbs-down" />
+              </Button>
+            </span>
+          </div>
         </td>
         <td>
-          <ButtonToolbar>
-            <Button bsSize="xsmall">
-              <Link to={`/postdetail/${post.id}`}>
-                <Glyphicon glyph="info-sign" />
-              </Link>
-            </Button>
-            <Button bsSize="xsmall">
-              <Link to={`/postedit/${post.id}`}>
-                <Glyphicon glyph="edit" />
-              </Link>
-            </Button>
-            <Button
-              bsSize="xsmall"
-              bsStyle="danger"
-              onClick={this.handleDelete}
-            >
-              <Glyphicon glyph="trash" />
-            </Button>
-          </ButtonToolbar>
+          <Link to={`/postdetail/${post.id}`}>View</Link>{' '}
+          <Link to={`/postedit/${post.id}`}>Edit</Link>{' '}
+          <a style={{ cursor: 'pointer' }} onClick={this.handleDelete}>
+            Delete
+          </a>
         </td>
       </tr>
     );

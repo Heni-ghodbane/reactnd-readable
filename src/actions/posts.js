@@ -14,6 +14,7 @@ export const DELETED_COMMENT = 'DELETED_COMMENT';
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT';
 export const VOTED_ON_COMMENT = 'VOTED_ON_COMMENT';
 export const EDITED_COMMENT = 'EDITED_COMMENT';
+export const SET_ORDER_BY_COMMENTS = 'SET_ORDER_BY_COMMENTS';
 
 export const receivePosts = (category, posts) => ({
   type: RECEIVE_POSTS,
@@ -159,3 +160,8 @@ export const editComment = comment => async dispatch => {
   const updatedComment = await response.json();
   dispatch(editedComment(updatedComment));
 };
+
+export const setOrderByComments = orderBy => ({
+  type: SET_ORDER_BY_COMMENTS,
+  orderBy,
+});

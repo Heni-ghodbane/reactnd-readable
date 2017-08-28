@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
@@ -39,44 +38,37 @@ class CommentListItem extends PureComponent {
           {formatTimestamp(comment.timestamp)}
         </td>
         <td>
-          {comment.voteScore}
-          <ButtonToolbar>
-            <Button
-              bsSize="xsmall"
-              bsStyle="success"
-              onClick={this.handleUpVote}
+          <div style={{ 'text-align': 'center' }}>
+            {comment.voteScore}{' '}
+            <span
+              style={{
+                float: 'right',
+                margin: 5,
+              }}
             >
-              <Glyphicon glyph="plus" />
-            </Button>
-            <Button
-              bsSize="xsmall"
-              bsStyle="danger"
-              onClick={this.handleDownVote}
-            >
-              <Glyphicon glyph="minus" />
-            </Button>
-          </ButtonToolbar>
+              <Button
+                bsSize="xsmall"
+                bsStyle="success"
+                onClick={this.handleUpVote}
+              >
+                <Glyphicon glyph="thumbs-up" />
+              </Button>{' '}
+              <Button
+                bsSize="xsmall"
+                bsStyle="danger"
+                onClick={this.handleDownVote}
+              >
+                <Glyphicon glyph="thumbs-down" />
+              </Button>
+            </span>
+          </div>
         </td>
         <td>
-          <ButtonToolbar>
-            <Button bsSize="xsmall">
-              <Link to={`/commentdetail/${comment.id}`}>
-                <Glyphicon glyph="info-sign" />
-              </Link>
-            </Button>
-            <Button bsSize="xsmall">
-              <Link to={`/commentedit/${comment.id}`}>
-                <Glyphicon glyph="edit" />
-              </Link>
-            </Button>
-            <Button
-              bsSize="xsmall"
-              bsStyle="danger"
-              onClick={this.handleDelete}
-            >
-              <Glyphicon glyph="trash" />
-            </Button>
-          </ButtonToolbar>
+          <Link to={`/commentdetail/${comment.id}`}>View</Link>{' '}
+          <Link to={`/commentedit/${comment.id}`}>Edit </Link>{' '}
+          <a bstyle={{ cursor: 'pointer' }} onClick={this.handleDelete}>
+            Delete
+          </a>
         </td>
       </tr>
     );

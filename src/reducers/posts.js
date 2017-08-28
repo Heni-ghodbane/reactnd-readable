@@ -12,6 +12,7 @@ import {
   RECEIVE_COMMENT,
   VOTED_ON_COMMENT,
   EDITED_COMMENT,
+  SET_ORDER_BY_COMMENTS,
 } from '../actions';
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   currentPost: null,
   comments: [],
   currentComment: null,
+  commentsOrderBy: 'voteCount',
 };
 
 const posts = (state = initialState, action) => {
@@ -99,6 +101,11 @@ const posts = (state = initialState, action) => {
       };
     case EDITED_COMMENT:
       return state;
+    case SET_ORDER_BY_COMMENTS:
+      return {
+        ...state,
+        commentsOrderBy: action.orderBy,
+      };
     default:
       return state;
   }

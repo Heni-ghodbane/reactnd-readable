@@ -11,11 +11,12 @@ import Col from 'react-bootstrap/lib/Col';
 import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Form from 'react-bootstrap/lib/Form';
+import orderBy from 'lodash.orderby';
 
 import CommentListItem from './CommentListItem';
-import { fetchPostComments } from '../actions';
+import { fetchPostComments, setOrderByComments } from '../actions';
 
-const tableHeadings = ['Body', 'Author', 'Date', 'Vote Score', 'Actions'];
+const tableHeadings = ['Body', 'Author', 'Date', 'Vote', 'Actions'];
 
 class CommentsList extends Component {
   componentDidMount() {
@@ -23,13 +24,18 @@ class CommentsList extends Component {
     fetchPostComments(post.id);
   }
 
-  handleChange = event => {};
+  handleChange = event => {
+    this.props.setOrderByComments(event.target.value);
+  };
 
   render() {
     const { comments } = this.props;
 
     return (
       <div>
+        <h3>
+          There are {comments.length} Comments
+        </h3>
         <Grid>
           <Row className="show-grid">
             <Col xs={12} mdPush={8} md={4}>
@@ -42,6 +48,7 @@ class CommentsList extends Component {
                     componentClass="select"
                     placeholder="select"
                     onChange={this.handleChange}
+                    value={this.props.orderBy}
                   >
                     <option value="voteCount">Vote Count</option>
                     <option value="timestamp">Date</option>
@@ -49,8 +56,7 @@ class CommentsList extends Component {
                 </FormGroup>
                 <Link to="/addcomment">
                   <Button bsStyle="primary" style={{ margin: 10 }}>
-                    <Glyphicon glyph="plus" />
-                    Add Comment
+                    <Glyphicon glyph="plus" /> Add Comment
                   </Button>
                 </Link>
               </Form>
@@ -82,9 +88,19 @@ class CommentsList extends Component {
 }
 
 const mapStateToProps = state => {
+  let comments;
+  if (state.posts.commentsOrderBy === 'voteCount') {
+    comments = orderBy(state.posts.comments, ['voteCount'], ['desc']);
+  } else {
+    comments = orderBy(state.posts.comments, ['timestamp'], ['desc']);
+  }
   return {
-    comments: state.posts.comments,
+    comments,
+    orderBy: state.posts.commentsOrderBy,
   };
 };
 
-export default connect(mapStateToProps, { fetchPostComments })(CommentsList);
+export default connect(mapStateToProps, {
+  fetchPostComments,
+  setOrderByComments,
+})(CommentsList);

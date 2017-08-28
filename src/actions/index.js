@@ -27,6 +27,8 @@ import {
   VOTED_ON_COMMENT,
   editComment,
   EDITED_COMMENT,
+  SET_ORDER_BY_COMMENTS,
+  setOrderByComments,
 } from './posts';
 
 export {
@@ -58,4 +60,6 @@ export {
   VOTED_ON_COMMENT,
   editComment,
   EDITED_COMMENT,
+  SET_ORDER_BY_COMMENTS,
+  setOrderByComments,
 };

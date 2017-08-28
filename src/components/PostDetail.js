@@ -115,7 +115,6 @@ class PostDetail extends Component {
             </FormGroup>
           </Form>
           <PageHeader />
-          <h3>Comments</h3>
           <CommentsList post={post} />
         </div>
       );

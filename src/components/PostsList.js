@@ -16,20 +16,9 @@ import orderBy from 'lodash.orderby';
 import { setOrderByPosts } from '../actions';
 import PostListItem from './PostListItem';
 
-const tableHeadings = [
-  'Title',
-  'Body',
-  'Author',
-  'Date',
-  'Vote Score',
-  'Actions',
-];
+const tableHeadings = ['Title', 'Body', 'Author', 'Date', 'Vote', 'Actions'];
 
 class PostsList extends Component {
-  state = {
-    value: 1,
-  };
-
   handleChange = event => {
     this.props.setOrderByPosts(event.target.value);
   };
@@ -51,6 +40,7 @@ class PostsList extends Component {
                     componentClass="select"
                     placeholder="select"
                     onChange={this.handleChange}
+                    value={this.props.orderBy}
                   >
                     <option value="voteCount">Vote Count</option>
                     <option value="timestamp">Date</option>
@@ -58,8 +48,7 @@ class PostsList extends Component {
                 </FormGroup>
                 <Link to="/addpost">
                   <Button bsStyle="primary" style={{ margin: 10 }}>
-                    <Glyphicon glyph="plus" />
-                    Add Post
+                    <Glyphicon glyph="plus" /> Add Post
                   </Button>
                 </Link>
               </Form>
@@ -97,6 +86,7 @@ const mapStateToProps = state => {
   }
   return {
     posts,
+    orderBy: state.posts.orderBy,
   };
 };
 
