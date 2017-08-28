@@ -1,5 +1,5 @@
 import * as PostsAPI from '../util/postsAPI';
-import { AllCategories } from '../constants';
+import { ALL_CATEGORIES } from '../constants';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const RECEIVE_POST = 'RECEIVE_POST';
@@ -28,9 +28,8 @@ export const receivePosts = (category, posts) => ({
 });
 
 export const fetchPostsByCategory = category => async dispatch => {
-  // Pass in null for all categories
   let filterByCategory = null;
-  if (category !== AllCategories.path) {
+  if (category !== ALL_CATEGORIES.path) {
     filterByCategory = category.toLowerCase();
   }
   const response = await PostsAPI.fetchPostsByCategory(filterByCategory);

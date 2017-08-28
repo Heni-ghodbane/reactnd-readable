@@ -1,10 +1,10 @@
-const URL = 'http://localhost:5001';
+import { SERVER_URL, SERVER_AUTH } from '../constants';
 
 export const fetchCategories = () =>
-  fetch(`${URL}/categories`, {
+  fetch(`${SERVER_URL}/categories`, {
     mode: 'cors',
     headers: {
       accept: 'application/json',
-      authorization: 'Winston2017',
+      authorization: SERVER_AUTH,
     },
   });

@@ -1,4 +1,4 @@
-import { AllCategories } from '../constants';
+import { ALL_CATEGORIES } from '../constants';
 
 import {
   RECEIVE_POSTS,
@@ -20,7 +20,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  category: AllCategories.path,
+  category: ALL_CATEGORIES.path,
   orderBy: 'voteCount',
   data: [],
   currentPost: null,
