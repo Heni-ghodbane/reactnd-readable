@@ -17,7 +17,7 @@ import { SORTBY_MOST_VOTES, SORTBY_MOST_RECENT } from '../constants';
 import { setOrderByPosts } from '../actions';
 import PostListItem from './PostListItem';
 
-const tableHeadings = ['Title', 'Body', 'Author', 'Date', 'Vote', 'Actions'];
+const tableHeadings = ['Title', 'Body', 'Author', 'Date', 'Votes', 'Actions'];
 
 class PostsList extends Component {
   handleChange = event => {

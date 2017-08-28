@@ -17,7 +17,7 @@ import { SORTBY_MOST_VOTES, SORTBY_MOST_RECENT } from '../constants';
 import CommentListItem from './CommentListItem';
 import { fetchPostComments, setOrderByComments } from '../actions';
 
-const tableHeadings = ['Body', 'Author', 'Date', 'Vote', 'Actions'];
+const tableHeadings = ['Body', 'Author', 'Date', 'Votes', 'Actions'];
 
 class CommentsList extends Component {
   componentDidMount() {

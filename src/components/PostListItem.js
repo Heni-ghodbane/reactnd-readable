@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 import { formatTimestamp } from '../util/formatters';
@@ -44,20 +43,16 @@ class PostListItem extends PureComponent {
           <div className="vote-score">
             {post.voteScore}{' '}
             <span>
-              <Button
-                bsSize="xsmall"
-                bsStyle="success"
+              <Glyphicon
+                className="cursor-pointer"
+                glyph="thumbs-up"
                 onClick={this.handleUpVote}
-              >
-                <Glyphicon glyph="thumbs-up" />
-              </Button>{' '}
-              <Button
-                bsSize="xsmall"
-                bsStyle="danger"
+              />{' '}
+              <Glyphicon
+                className="cursor-pointer"
+                glyph="thumbs-down"
                 onClick={this.handleDownVote}
-              >
-                <Glyphicon glyph="thumbs-down" />
-              </Button>
+              />
             </span>
           </div>
         </td>
