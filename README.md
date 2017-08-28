@@ -26,4 +26,6 @@ Finally, navigate to `http://localhost:3000/` in your browser.
 ## Notes
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+This project uses [React-Bootstrap](https://react-bootstrap.github.io/getting-started.html).
+
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
