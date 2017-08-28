@@ -42,7 +42,7 @@ class CommentEditForm extends Component {
 
   render() {
     const { comment, workingComment } = this.props;
-    if (workingComment) {
+    if (comment && workingComment) {
       return (
         <div>
           <PageHeader>Comment Edit Form</PageHeader>
