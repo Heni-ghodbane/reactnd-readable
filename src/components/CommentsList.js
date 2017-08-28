@@ -13,6 +13,7 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Form from 'react-bootstrap/lib/Form';
 import orderBy from 'lodash.orderby';
 
+import { SORTBY_MOST_VOTES, SORTBY_MOST_RECENT } from '../constants';
 import CommentListItem from './CommentListItem';
 import { fetchPostComments, setOrderByComments } from '../actions';
 
@@ -50,8 +51,8 @@ class CommentsList extends Component {
                     onChange={this.handleChange}
                     value={this.props.orderBy}
                   >
-                    <option value="voteCount">Vote Count</option>
-                    <option value="timestamp">Date</option>
+                    <option value={SORTBY_MOST_VOTES}>Most votes</option>
+                    <option value={SORTBY_MOST_RECENT}>MostRecent</option>
                   </FormControl>
                 </FormGroup>
                 <Link to="/addcomment">
@@ -89,10 +90,10 @@ class CommentsList extends Component {
 
 const mapStateToProps = state => {
   let comments;
-  if (state.posts.commentsOrderBy === 'voteCount') {
-    comments = orderBy(state.posts.comments, ['voteCount'], ['desc']);
+  if (state.posts.commentsOrderBy === SORTBY_MOST_VOTES) {
+    comments = orderBy(state.posts.comments, [SORTBY_MOST_VOTES], ['desc']);
   } else {
-    comments = orderBy(state.posts.comments, ['timestamp'], ['desc']);
+    comments = orderBy(state.posts.comments, [SORTBY_MOST_RECENT], ['desc']);
   }
   return {
     comments,

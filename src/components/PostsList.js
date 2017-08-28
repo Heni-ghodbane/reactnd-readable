@@ -13,6 +13,7 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Form from 'react-bootstrap/lib/Form';
 import orderBy from 'lodash.orderby';
 
+import { SORTBY_MOST_VOTES, SORTBY_MOST_RECENT } from '../constants';
 import { setOrderByPosts } from '../actions';
 import PostListItem from './PostListItem';
 
@@ -42,8 +43,8 @@ class PostsList extends Component {
                     onChange={this.handleChange}
                     value={this.props.orderBy}
                   >
-                    <option value="voteCount">Vote Count</option>
-                    <option value="timestamp">Date</option>
+                    <option value={SORTBY_MOST_VOTES}>Most votes</option>
+                    <option value={SORTBY_MOST_RECENT}>Most recent</option>
                   </FormControl>
                 </FormGroup>
                 <Link to="/addpost">
@@ -79,10 +80,10 @@ class PostsList extends Component {
 
 const mapStateToProps = state => {
   let posts;
-  if (state.posts.orderBy === 'voteCount') {
-    posts = orderBy(state.posts.data, ['voteCount'], ['desc']);
+  if (state.posts.orderBy === SORTBY_MOST_VOTES) {
+    posts = orderBy(state.posts.data, [SORTBY_MOST_VOTES], ['desc']);
   } else {
-    posts = orderBy(state.posts.data, ['timestamp'], ['desc']);
+    posts = orderBy(state.posts.data, [SORTBY_MOST_RECENT], ['desc']);
   }
   return {
     posts,

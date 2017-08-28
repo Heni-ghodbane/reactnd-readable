@@ -1,4 +1,4 @@
-import { ALL_CATEGORIES } from '../constants';
+import { ALL_CATEGORIES, SORTBY_MOST_VOTES } from '../constants';
 
 import {
   RECEIVE_POSTS,
@@ -21,12 +21,12 @@ import {
 
 const initialState = {
   category: ALL_CATEGORIES.path,
-  orderBy: 'voteCount',
+  orderBy: SORTBY_MOST_VOTES,
   data: [],
   currentPost: null,
   comments: [],
   currentComment: null,
-  commentsOrderBy: 'voteCount',
+  commentsOrderBy: SORTBY_MOST_VOTES,
   workingPost: {
     category: '',
     title: '',
