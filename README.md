@@ -23,6 +23,16 @@ yarn start
 
 Finally, navigate to `http://localhost:3000/` in your browser.
 
+## Usage
+### Category View
+The application has views for all post categories including an All Categories view.  Each view list all of the posts ordered by voteScore (highest score first) along with a control for changing the sort method for the list.  You can add a new post within each view.
+
+### Post Detail View
+This view show the details of a post and a list all of the comments for that post, ordered by voteScore (highest first), along with a control to reorder comments by score or date.  You can also edit or delete posts, and add comments.
+
+### Comment Detail View
+This view show the details of a comment.  You can also edit or delete the comment.
+
 ## Notes
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
