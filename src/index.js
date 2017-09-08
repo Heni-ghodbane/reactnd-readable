@@ -12,6 +12,8 @@ import PostEditForm from './components/PostEditForm'
 import CommentDetail from './components/CommentDetail'
 import CommentAddForm from './components/CommentAddForm'
 import CommentEditForm from './components/CommentEditForm'
+import PostNotFound from './components/PostNotFound'
+import FourOhFourPage from './components/FourOhFourPage'
 import store from './store'
 
 ReactDOM.render(
@@ -29,6 +31,8 @@ ReactDOM.render(
           <Route path="/addcomment" component={CommentAddForm} />
           <Route path="/commentdetail/:id" component={CommentDetail} />
           <Route path="/commentedit/:id" component={CommentEditForm} />
+          <Route path="/postnotfound/:id" component={PostNotFound} />
+          <Route component={FourOhFourPage} />
         </Switch>
       </Router>
     </div>

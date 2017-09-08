@@ -12,6 +12,7 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 
 import * as actions from '../actions'
 import { formatTimestamp } from '../util/formatters'
+import { isEmpty } from '../util/misc'
 import CommentsList from './CommentsList'
 
 class PostDetail extends Component {
@@ -19,6 +20,13 @@ class PostDetail extends Component {
     const { fetchPostById, match, post } = this.props
     if (!post || post.id !== match.params.id) {
       fetchPostById(match.params.id)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { history, match } = this.props
+    if (isEmpty(nextProps.post)) {
+      history.push(`/postnotfound/${match.params.id}`)
     }
   }
 
