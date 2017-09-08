@@ -1,4 +1,4 @@
-# Contributing to Readable
+# Contributing to reactnd-readable
 
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
 
@@ -7,7 +7,7 @@
 Everybody should be able to help. Here's how you can make this project more
 awesome:
 
-1. [Fork it](https://github.com/iwaldman/readable/fork)
+1. [Fork it](https://github.com/iwaldman/reactnd-readable/fork)
 2. Improve it
 3. Submit a [pull request](https://help.github.com/articles/creating-a-pull-request)
 
