@@ -72,16 +72,16 @@ class PostsList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  let posts
-  if (state.posts.orderBy === SORTBY_MOST_VOTES) {
-    posts = orderBy(state.posts.data, [SORTBY_MOST_VOTES], ['desc'])
+const mapStateToProps = ({ posts }) => {
+  let orderedPosts
+  if (posts.orderBy === SORTBY_MOST_VOTES) {
+    orderedPosts = orderBy(posts.data, [SORTBY_MOST_VOTES], ['desc'])
   } else {
-    posts = orderBy(state.posts.data, [SORTBY_MOST_RECENT], ['desc'])
+    orderedPosts = orderBy(posts.data, [SORTBY_MOST_RECENT], ['desc'])
   }
   return {
-    posts,
-    orderBy: state.posts.orderBy,
+    posts: orderedPosts,
+    orderBy: posts.orderBy,
   }
 }
 

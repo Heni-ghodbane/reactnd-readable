@@ -1,48 +1,48 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
-import Button from 'react-bootstrap/lib/Button';
-import Form from 'react-bootstrap/lib/Form';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Col from 'react-bootstrap/lib/Col';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
+import Button from 'react-bootstrap/lib/Button'
+import Form from 'react-bootstrap/lib/Form'
+import FormGroup from 'react-bootstrap/lib/FormGroup'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import Col from 'react-bootstrap/lib/Col'
+import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 
-import { fetchPostById, editPost, setWorkingPost } from '../actions';
+import * as actions from '../actions'
 
 class PostEditForm extends Component {
   componentDidMount() {
-    const { fetchPostById, match } = this.props;
-    fetchPostById(match.params.id);
+    const { fetchPostById, match } = this.props
+    fetchPostById(match.params.id)
   }
 
   componentWillReceiveProps(nextProps) {
-    const { post, workingPost, isEditing } = nextProps;
+    const { post, workingPost, isEditing } = nextProps
     if (!isEditing) {
-      workingPost.title = post.title;
-      workingPost.body = post.body;
+      workingPost.title = post.title
+      workingPost.body = post.body
     }
   }
 
   handleChange = event => {
-    const { id, value } = event.target;
-    this.props.setWorkingPost({ [id]: value });
-  };
+    const { id, value } = event.target
+    this.props.setWorkingPost({ [id]: value })
+  }
 
   handleSave = () => {
-    const { post, editPost, history, workingPost } = this.props;
+    const { post, editPost, history, workingPost } = this.props
     const updatedPost = {
       ...post,
       ...workingPost,
-    };
-    editPost(updatedPost);
-    history.replace('/');
-  };
+    }
+    editPost(updatedPost)
+    history.replace('/')
+  }
 
   render() {
-    const { workingPost } = this.props;
+    const { workingPost } = this.props
     if (workingPost) {
       return (
         <div>
@@ -89,23 +89,19 @@ class PostEditForm extends Component {
             </FormGroup>
           </Form>
         </div>
-      );
+      )
     } else {
-      return <div>Loading...</div>;
+      return <div>Loading...</div>
     }
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ posts }) => {
   return {
-    post: state.posts.currentPost,
-    workingPost: state.posts.workingPost,
-    isEditing: state.posts.isEditing,
-  };
-};
+    post: posts.currentPost,
+    workingPost: posts.workingPost,
+    isEditing: posts.isEditing,
+  }
+}
 
-export default connect(mapStateToProps, {
-  fetchPostById,
-  editPost,
-  setWorkingPost,
-})(PostEditForm);
+export default connect(mapStateToProps, actions)(PostEditForm)

@@ -117,10 +117,10 @@ class PostAddForm extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ categories, posts }) => {
   return {
-    categories: state.categories,
-    workingPost: state.posts.workingPost,
+    categories,
+    workingPost: posts.workingPost,
   }
 }
 

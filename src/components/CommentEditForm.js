@@ -83,11 +83,11 @@ class CommentEditForm extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ posts }) => {
   return {
-    comment: state.posts.currentComment,
-    workingComment: state.posts.workingComment,
-    isEditing: state.posts.isEditing,
+    comment: posts.currentComment,
+    workingComment: posts.workingComment,
+    isEditing: posts.isEditing,
   }
 }
 export default connect(mapStateToProps, actions)(CommentEditForm)

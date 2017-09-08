@@ -114,9 +114,9 @@ class PostDetail extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ posts }) => {
   return {
-    post: state.posts.currentPost,
+    post: posts.currentPost,
   }
 }
 

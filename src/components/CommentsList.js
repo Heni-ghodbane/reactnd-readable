@@ -80,16 +80,16 @@ class CommentsList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  let comments
-  if (state.posts.commentsOrderBy === SORTBY_MOST_VOTES) {
-    comments = orderBy(state.posts.comments, [SORTBY_MOST_VOTES], ['desc'])
+const mapStateToProps = ({ posts }) => {
+  let orderedComments
+  if (posts.orderedCommentsOrderBy === SORTBY_MOST_VOTES) {
+    orderedComments = orderBy(posts.comments, [SORTBY_MOST_VOTES], ['desc'])
   } else {
-    comments = orderBy(state.posts.comments, [SORTBY_MOST_RECENT], ['desc'])
+    orderedComments = orderBy(posts.comments, [SORTBY_MOST_RECENT], ['desc'])
   }
   return {
-    comments,
-    orderBy: state.posts.commentsOrderBy,
+    comments: orderedComments,
+    orderBy: posts.commentsOrderBy,
   }
 }
 

@@ -101,10 +101,10 @@ class CommentAddForm extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ posts }) => {
   return {
-    post: state.posts.currentPost,
-    workingComment: state.posts.workingComment,
+    post: posts.currentPost,
+    workingComment: posts.workingComment,
   }
 }
 
