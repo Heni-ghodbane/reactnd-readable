@@ -1,41 +1,41 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
-import Button from 'react-bootstrap/lib/Button';
-import Form from 'react-bootstrap/lib/Form';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Col from 'react-bootstrap/lib/Col';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import uuidv4 from 'uuid/v4';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
+import Button from 'react-bootstrap/lib/Button'
+import Form from 'react-bootstrap/lib/Form'
+import FormGroup from 'react-bootstrap/lib/FormGroup'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import Col from 'react-bootstrap/lib/Col'
+import ControlLabel from 'react-bootstrap/lib/ControlLabel'
+import uuidv4 from 'uuid/v4'
 
-import { addComment, setWorkingComment } from '../actions';
+import * as actions from '../actions'
 
 class CommentAddForm extends Component {
   handleChange = event => {
-    const { id, value } = event.target;
-    this.props.setWorkingComment({ [id]: value });
-  };
+    const { id, value } = event.target
+    this.props.setWorkingComment({ [id]: value })
+  }
 
   handleCancel = () => {
-    this.props.history.goBack();
-  };
+    this.props.history.goBack()
+  }
 
   handleSave = () => {
-    const { workingComment } = this.props;
+    const { workingComment } = this.props
     const comment = {
       ...workingComment,
       id: uuidv4(),
       parentId: this.props.post.id,
       timestamp: Date.now(),
-    };
-    this.props.addComment(comment);
-    this.props.history.goBack();
-  };
+    }
+    this.props.addComment(comment)
+    this.props.history.goBack()
+  }
 
   render() {
-    const { workingComment } = this.props;
+    const { workingComment } = this.props
     return (
       <div>
         <PageHeader>Comment Add Form</PageHeader>
@@ -97,7 +97,7 @@ class CommentAddForm extends Component {
           </FormGroup>
         </Form>
       </div>
-    );
+    )
   }
 }
 
@@ -105,9 +105,7 @@ const mapStateToProps = state => {
   return {
     post: state.posts.currentPost,
     workingComment: state.posts.workingComment,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, { addComment, setWorkingComment })(
-  CommentAddForm,
-);
+export default connect(mapStateToProps, actions)(CommentAddForm)

@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Table from 'react-bootstrap/lib/Table';
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Button from 'react-bootstrap/lib/Button';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import Form from 'react-bootstrap/lib/Form';
-import orderBy from 'lodash.orderby';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import FormGroup from 'react-bootstrap/lib/FormGroup'
+import ControlLabel from 'react-bootstrap/lib/ControlLabel'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import Table from 'react-bootstrap/lib/Table'
+import Grid from 'react-bootstrap/lib/Grid'
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
+import Button from 'react-bootstrap/lib/Button'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
+import Form from 'react-bootstrap/lib/Form'
+import orderBy from 'lodash.orderby'
 
-import { SORTBY_MOST_VOTES, SORTBY_MOST_RECENT } from '../constants';
-import { setOrderByPosts } from '../actions';
-import PostListItem from './PostListItem';
+import { SORTBY_MOST_VOTES, SORTBY_MOST_RECENT } from '../constants'
+import * as actions from '../actions'
+import PostListItem from './PostListItem'
 
-const tableHeadings = ['Title', 'Body', 'Author', 'Date', 'Votes', 'Actions'];
+const tableHeadings = ['Title', 'Body', 'Author', 'Date', 'Votes', 'Actions']
 
 class PostsList extends Component {
   handleChange = event => {
-    this.props.setOrderByPosts(event.target.value);
-  };
+    this.props.setOrderByPosts(event.target.value)
+  }
 
   render() {
-    const { posts } = this.props;
+    const { posts } = this.props
 
     return (
       <div>
@@ -60,13 +60,7 @@ class PostsList extends Component {
         <div className="posts-table">
           <Table condensed bordered hover>
             <thead>
-              <tr>
-                {tableHeadings.map(th =>
-                  <th key={th}>
-                    {th}
-                  </th>,
-                )}
-              </tr>
+              <tr>{tableHeadings.map(th => <th key={th}>{th}</th>)}</tr>
             </thead>
             <tbody>
               {posts.map(post => <PostListItem key={post.id} post={post} />)}
@@ -74,23 +68,21 @@ class PostsList extends Component {
           </Table>
         </div>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => {
-  let posts;
+  let posts
   if (state.posts.orderBy === SORTBY_MOST_VOTES) {
-    posts = orderBy(state.posts.data, [SORTBY_MOST_VOTES], ['desc']);
+    posts = orderBy(state.posts.data, [SORTBY_MOST_VOTES], ['desc'])
   } else {
-    posts = orderBy(state.posts.data, [SORTBY_MOST_RECENT], ['desc']);
+    posts = orderBy(state.posts.data, [SORTBY_MOST_RECENT], ['desc'])
   }
   return {
     posts,
     orderBy: state.posts.orderBy,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, {
-  setOrderByPosts,
-})(PostsList);
+export default connect(mapStateToProps, actions)(PostsList)

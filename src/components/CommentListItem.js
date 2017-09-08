@@ -1,41 +1,35 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 
-import { formatTimestamp } from '../util/formatters';
-import { deleteComment, voteOnComment } from '../actions';
+import { formatTimestamp } from '../util/formatters'
+import * as actions from '../actions'
 
 class CommentListItem extends PureComponent {
   handleDelete = () => {
-    const { comment, deleteComment } = this.props;
-    deleteComment(comment.id);
-  };
+    const { comment, deleteComment } = this.props
+    deleteComment(comment.id)
+  }
 
   handleUpVote = () => {
-    const { comment, voteOnComment } = this.props;
-    voteOnComment(comment.id, 'upVote');
-  };
+    const { comment, voteOnComment } = this.props
+    voteOnComment(comment.id, 'upVote')
+  }
 
   handleDownVote = () => {
-    const { comment, voteOnComment } = this.props;
-    voteOnComment(comment.id, 'downVote');
-  };
+    const { comment, voteOnComment } = this.props
+    voteOnComment(comment.id, 'downVote')
+  }
 
   render() {
-    const { comment } = this.props;
+    const { comment } = this.props
 
     return (
       <tr>
-        <td>
-          {comment.body}
-        </td>
-        <td>
-          {comment.author}
-        </td>
-        <td>
-          {formatTimestamp(comment.timestamp)}
-        </td>
+        <td>{comment.body}</td>
+        <td>{comment.author}</td>
+        <td>{formatTimestamp(comment.timestamp)}</td>
         <td>
           <div className="vote-score">
             {comment.voteScore}{' '}
@@ -61,8 +55,8 @@ class CommentListItem extends PureComponent {
           </a>
         </td>
       </tr>
-    );
+    )
   }
 }
 
-export default connect(null, { deleteComment, voteOnComment })(CommentListItem);
+export default connect(null, actions)(CommentListItem)

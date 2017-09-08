@@ -1,38 +1,38 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
-import Button from 'react-bootstrap/lib/Button';
-import Form from 'react-bootstrap/lib/Form';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Col from 'react-bootstrap/lib/Col';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import uuidv4 from 'uuid/v4';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
+import Button from 'react-bootstrap/lib/Button'
+import Form from 'react-bootstrap/lib/Form'
+import FormGroup from 'react-bootstrap/lib/FormGroup'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import Col from 'react-bootstrap/lib/Col'
+import ControlLabel from 'react-bootstrap/lib/ControlLabel'
+import uuidv4 from 'uuid/v4'
 
-import { addPost, setWorkingPost } from '../actions';
+import * as actions from '../actions'
 
 class PostAddForm extends Component {
   handleChange = event => {
-    const { id, value } = event.target;
-    this.props.setWorkingPost({ [id]: value });
-  };
+    const { id, value } = event.target
+    this.props.setWorkingPost({ [id]: value })
+  }
 
   handleSave = () => {
-    const { workingPost } = this.props;
+    const { workingPost } = this.props
     const post = {
       ...workingPost,
       id: uuidv4(),
       timestamp: Date.now(),
       category: workingPost.category.toLowerCase(),
-    };
-    this.props.addPost(post);
-    this.props.history.replace('/');
-  };
+    }
+    this.props.addPost(post)
+    this.props.history.replace('/')
+  }
 
   render() {
-    const { categories, workingPost } = this.props;
+    const { categories, workingPost } = this.props
     return (
       <div>
         <PageHeader>Post Add Form</PageHeader>
@@ -72,11 +72,11 @@ class PostAddForm extends Component {
                 value={workingPost.category}
                 onChange={this.handleChange}
               >
-                {categories.map(category =>
+                {categories.map(category => (
                   <option key={category.path} value={category.path}>
                     {category.name}
-                  </option>,
-                )}
+                  </option>
+                ))}
               </FormControl>
             </Col>
           </FormGroup>
@@ -113,7 +113,7 @@ class PostAddForm extends Component {
           </FormGroup>
         </Form>
       </div>
-    );
+    )
   }
 }
 
@@ -121,9 +121,7 @@ const mapStateToProps = state => {
   return {
     categories: state.categories,
     workingPost: state.posts.workingPost,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, { addPost, setWorkingPost })(
-  PostAddForm,
-);
+export default connect(mapStateToProps, actions)(PostAddForm)

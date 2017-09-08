@@ -1,47 +1,47 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
-import Button from 'react-bootstrap/lib/Button';
-import Form from 'react-bootstrap/lib/Form';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Col from 'react-bootstrap/lib/Col';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
+import Button from 'react-bootstrap/lib/Button'
+import Form from 'react-bootstrap/lib/Form'
+import FormGroup from 'react-bootstrap/lib/FormGroup'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import Col from 'react-bootstrap/lib/Col'
+import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 
-import { fetchComment, editComment, setWorkingComment } from '../actions';
+import * as actions from '../actions'
 
 class CommentEditForm extends Component {
   componentDidMount() {
-    const { fetchComment, match } = this.props;
-    fetchComment(match.params.id);
+    const { fetchComment, match } = this.props
+    fetchComment(match.params.id)
   }
 
   componentWillReceiveProps(nextProps) {
-    const { comment, isEditing, workingComment } = nextProps;
+    const { comment, isEditing, workingComment } = nextProps
     if (!isEditing) {
-      workingComment.body = comment.body;
+      workingComment.body = comment.body
     }
   }
 
   handleChange = event => {
-    const { id, value } = event.target;
-    this.props.setWorkingComment({ [id]: value });
-  };
+    const { id, value } = event.target
+    this.props.setWorkingComment({ [id]: value })
+  }
 
   handleSave = () => {
-    const { comment, editComment, history, workingComment } = this.props;
+    const { comment, editComment, history, workingComment } = this.props
     const updatedComment = {
       ...comment,
       ...workingComment,
-    };
-    editComment(updatedComment);
-    history.goBack();
-  };
+    }
+    editComment(updatedComment)
+    history.goBack()
+  }
 
   render() {
-    const { comment, workingComment } = this.props;
+    const { comment, workingComment } = this.props
     if (comment && workingComment) {
       return (
         <div>
@@ -76,9 +76,9 @@ class CommentEditForm extends Component {
             </FormGroup>
           </Form>
         </div>
-      );
+      )
     } else {
-      return <div>Loading...</div>;
+      return <div>Loading...</div>
     }
   }
 }
@@ -88,10 +88,6 @@ const mapStateToProps = state => {
     comment: state.posts.currentComment,
     workingComment: state.posts.workingComment,
     isEditing: state.posts.isEditing,
-  };
-};
-export default connect(mapStateToProps, {
-  fetchComment,
-  editComment,
-  setWorkingComment,
-})(CommentEditForm);
+  }
+}
+export default connect(mapStateToProps, actions)(CommentEditForm)

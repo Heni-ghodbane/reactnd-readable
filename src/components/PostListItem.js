@@ -1,44 +1,36 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 
-import { formatTimestamp } from '../util/formatters';
-import { deletePostById, voteOnPost } from '../actions';
+import { formatTimestamp } from '../util/formatters'
+import * as actions from '../actions'
 
 class PostListItem extends PureComponent {
   handleDelete = event => {
-    const { post, deletePostById } = this.props;
-    deletePostById(post.id);
-  };
+    const { post, deletePostById } = this.props
+    deletePostById(post.id)
+  }
 
   handleUpVote = () => {
-    const { post, voteOnPost } = this.props;
-    voteOnPost(post.id, 'upVote');
-  };
+    const { post, voteOnPost } = this.props
+    voteOnPost(post.id, 'upVote')
+  }
 
   handleDownVote = () => {
-    const { post, voteOnPost } = this.props;
-    voteOnPost(post.id, 'downVote');
-  };
+    const { post, voteOnPost } = this.props
+    voteOnPost(post.id, 'downVote')
+  }
 
   render() {
-    const { post } = this.props;
+    const { post } = this.props
 
     return (
       <tr>
-        <td>
-          {post.title}
-        </td>
-        <td>
-          {post.body}
-        </td>
-        <td>
-          {post.author}
-        </td>
-        <td>
-          {formatTimestamp(post.timestamp)}
-        </td>
+        <td>{post.title}</td>
+        <td>{post.body}</td>
+        <td>{post.author}</td>
+        <td>{formatTimestamp(post.timestamp)}</td>
         <td>
           <div className="vote-score">
             {post.voteScore}{' '}
@@ -64,8 +56,8 @@ class PostListItem extends PureComponent {
           </a>
         </td>
       </tr>
-    );
+    )
   }
 }
 
-export default connect(null, { deletePostById, voteOnPost })(PostListItem);
+export default connect(null, actions)(PostListItem)

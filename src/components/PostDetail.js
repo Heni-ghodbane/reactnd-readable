@@ -1,34 +1,35 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
-import Button from 'react-bootstrap/lib/Button';
-import Form from 'react-bootstrap/lib/Form';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Col from 'react-bootstrap/lib/Col';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import { fetchPostById, deletePostById } from '../actions';
-import { formatTimestamp } from '../util/formatters';
-import CommentsList from './CommentsList';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
+import Button from 'react-bootstrap/lib/Button'
+import Form from 'react-bootstrap/lib/Form'
+import FormGroup from 'react-bootstrap/lib/FormGroup'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import Col from 'react-bootstrap/lib/Col'
+import ControlLabel from 'react-bootstrap/lib/ControlLabel'
+
+import * as actions from '../actions'
+import { formatTimestamp } from '../util/formatters'
+import CommentsList from './CommentsList'
 
 class PostDetail extends Component {
   componentDidMount() {
-    const { fetchPostById, match, post } = this.props;
+    const { fetchPostById, match, post } = this.props
     if (!post || post.id !== match.params.id) {
-      fetchPostById(match.params.id);
+      fetchPostById(match.params.id)
     }
   }
 
   handleDelete = event => {
-    const { post, deletePostById, history } = this.props;
-    deletePostById(post.id);
-    history.replace('/');
-  };
+    const { post, deletePostById, history } = this.props
+    deletePostById(post.id)
+    history.replace('/')
+  }
 
   render() {
-    const { post } = this.props;
+    const { post } = this.props
     if (post) {
       return (
         <div>
@@ -39,9 +40,7 @@ class PostDetail extends Component {
                 Title
               </Col>
               <Col sm={10}>
-                <FormControl.Static>
-                  {post.title}
-                </FormControl.Static>
+                <FormControl.Static>{post.title}</FormControl.Static>
               </Col>
             </FormGroup>
             <FormGroup controlId="fgBody">
@@ -49,9 +48,7 @@ class PostDetail extends Component {
                 Body
               </Col>
               <Col sm={10}>
-                <FormControl.Static>
-                  {post.body}
-                </FormControl.Static>
+                <FormControl.Static>{post.body}</FormControl.Static>
               </Col>
             </FormGroup>
             <FormGroup controlId="fgAuthor">
@@ -59,9 +56,7 @@ class PostDetail extends Component {
                 Author
               </Col>
               <Col sm={10}>
-                <FormControl.Static>
-                  {post.author}
-                </FormControl.Static>
+                <FormControl.Static>{post.author}</FormControl.Static>
               </Col>
             </FormGroup>
             <FormGroup controlId="fgDate">
@@ -79,9 +74,7 @@ class PostDetail extends Component {
                 Vote Score
               </Col>
               <Col sm={10}>
-                <FormControl.Static>
-                  {post.voteScore}
-                </FormControl.Static>
+                <FormControl.Static>{post.voteScore}</FormControl.Static>
               </Col>
             </FormGroup>
             <FormGroup controlId="fgCategory">
@@ -89,9 +82,7 @@ class PostDetail extends Component {
                 Category
               </Col>
               <Col sm={10}>
-                <FormControl.Static>
-                  {post.category}
-                </FormControl.Static>
+                <FormControl.Static>{post.category}</FormControl.Static>
               </Col>
             </FormGroup>
             <FormGroup controlId="fgButtons">
@@ -116,9 +107,9 @@ class PostDetail extends Component {
           <PageHeader />
           <CommentsList post={post} />
         </div>
-      );
+      )
     } else {
-      return <div>Loading...</div>;
+      return <div>Loading...</div>
     }
   }
 }
@@ -126,9 +117,7 @@ class PostDetail extends Component {
 const mapStateToProps = state => {
   return {
     post: state.posts.currentPost,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, { fetchPostById, deletePostById })(
-  PostDetail,
-);
+export default connect(mapStateToProps, actions)(PostDetail)
