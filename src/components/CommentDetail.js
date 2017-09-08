@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
-import Button from 'react-bootstrap/lib/Button';
-import Form from 'react-bootstrap/lib/Form';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Col from 'react-bootstrap/lib/Col';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import { fetchComment, deleteComment } from '../actions';
-import { formatTimestamp } from '../util/formatters';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
+import Button from 'react-bootstrap/lib/Button'
+import Form from 'react-bootstrap/lib/Form'
+import FormGroup from 'react-bootstrap/lib/FormGroup'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import Col from 'react-bootstrap/lib/Col'
+import ControlLabel from 'react-bootstrap/lib/ControlLabel'
+import * as actions from '../actions'
+import { formatTimestamp } from '../util/formatters'
 
 class CommentDetail extends Component {
   componentDidMount() {
-    const { fetchComment, match } = this.props;
-    fetchComment(match.params.id);
+    const { fetchComment, match } = this.props
+    fetchComment(match.params.id)
   }
 
   handleDelete = () => {
-    const { comment, deleteComment, history } = this.props;
-    deleteComment(comment.id);
-    history.goBack();
-  };
+    const { comment, deleteComment, history } = this.props
+    deleteComment(comment.id)
+    history.goBack()
+  }
 
   render() {
-    const { comment } = this.props;
+    const { comment } = this.props
     if (comment) {
       return (
         <div>
@@ -36,9 +36,7 @@ class CommentDetail extends Component {
                 Body
               </Col>
               <Col sm={10}>
-                <FormControl.Static>
-                  {comment.body}
-                </FormControl.Static>
+                <FormControl.Static>{comment.body}</FormControl.Static>
               </Col>
             </FormGroup>
             <FormGroup controlId="fgAuthor">
@@ -46,9 +44,7 @@ class CommentDetail extends Component {
                 Author
               </Col>
               <Col sm={10}>
-                <FormControl.Static>
-                  {comment.author}
-                </FormControl.Static>
+                <FormControl.Static>{comment.author}</FormControl.Static>
               </Col>
             </FormGroup>
             <FormGroup controlId="fgDate">
@@ -66,9 +62,7 @@ class CommentDetail extends Component {
                 Vote Score
               </Col>
               <Col sm={10}>
-                <FormControl.Static>
-                  {comment.voteScore}
-                </FormControl.Static>
+                <FormControl.Static>{comment.voteScore}</FormControl.Static>
               </Col>
             </FormGroup>
             <FormGroup controlId="fgButtons">
@@ -91,9 +85,9 @@ class CommentDetail extends Component {
             </FormGroup>
           </Form>
         </div>
-      );
+      )
     } else {
-      return <div>Loading...</div>;
+      return <div>Loading...</div>
     }
   }
 }
@@ -101,9 +95,7 @@ class CommentDetail extends Component {
 const mapStateToProps = state => {
   return {
     comment: state.posts.currentComment,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, { fetchComment, deleteComment })(
-  CommentDetail,
-);
+export default connect(mapStateToProps, actions)(CommentDetail)
