@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PageHeader from 'react-bootstrap/lib/PageHeader'
 import Nav from 'react-bootstrap/lib/Nav'
 import NavItem from 'react-bootstrap/lib/NavItem'
 
 import { ALL_CATEGORIES } from '../constants'
-import { fetchCategories, fetchPostsByCategory } from '../actions'
+import * as actions from '../actions'
 import PostsList from './PostsList'
 
 class App extends Component {
@@ -42,9 +41,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <PageHeader>
-          Readable <small>A Content and Comment Web App</small>
-        </PageHeader>
         {this.renderCategories()}
         <PostsList />
       </div>
@@ -59,7 +55,4 @@ const mapStateToProps = ({ categories, posts }) => {
   }
 }
 
-export default connect(mapStateToProps, {
-  fetchCategories,
-  fetchPostsByCategory,
-})(App)
+export default connect(mapStateToProps, actions)(App)
