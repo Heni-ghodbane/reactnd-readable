@@ -47,10 +47,12 @@ export const receivePost = post => ({
   post,
 })
 
-const deletedPost = post => ({
-  type: DELETED_POST,
-  post,
-})
+const deletedPost = id => {
+  return {
+    type: DELETED_POST,
+    id,
+  }
+}
 
 const voted = post => ({
   type: VOTED_ON_POST,
@@ -104,9 +106,8 @@ export const fetchPostById = id => async dispatch => {
 }
 
 export const deletePostById = id => async dispatch => {
-  const response = await PostsAPI.deletePostById(id)
-  const post = await response.json()
-  dispatch(deletedPost(post))
+  await PostsAPI.deletePostById(id)
+  dispatch(deletedPost(id))
 }
 
 export const voteOnPost = (id, option) => async dispatch => {

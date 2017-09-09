@@ -1,4 +1,4 @@
-import { ALL_CATEGORIES, SORTBY_MOST_VOTES } from '../constants';
+import { ALL_CATEGORIES, SORTBY_MOST_VOTES } from '../constants'
 
 import {
   RECEIVE_POSTS,
@@ -17,7 +17,7 @@ import {
   SET_ORDER_BY_COMMENTS,
   SET_WORKING_POST,
   SET_WORKING_COMMENT,
-} from '../actions';
+} from '../actions'
 
 const initialState = {
   category: ALL_CATEGORIES.path,
@@ -39,7 +39,7 @@ const initialState = {
     body: '',
     author: '',
   },
-};
+}
 
 const posts = (state = initialState, action) => {
   switch (action.type) {
@@ -51,12 +51,12 @@ const posts = (state = initialState, action) => {
         data: action.payload.posts,
         comments: [],
         currentComment: null,
-      };
+      }
     case SET_ORDER_BY_POSTS:
       return {
         ...state,
         orderBy: action.orderBy,
-      };
+      }
     case RECEIVE_POST:
       return {
         ...state,
@@ -70,22 +70,22 @@ const posts = (state = initialState, action) => {
           body: '',
           author: '',
         },
-      };
+      }
     case DELETED_POST:
       return {
         ...state,
         currentPost: null,
-        data: state.data.filter(post => post.id !== action.post.id),
+        data: state.data.filter(post => post.id !== action.id),
         comments: [],
         currentComment: null,
-      };
+      }
     case VOTED_ON_POST:
       return {
         ...state,
         data: state.data.map(
           post => (post.id === action.post.id ? action.post : post),
         ),
-      };
+      }
     case ADDED_POST:
       return {
         ...state,
@@ -95,7 +95,7 @@ const posts = (state = initialState, action) => {
           body: '',
           author: '',
         },
-      };
+      }
     case EDITED_POST:
       return {
         ...state,
@@ -106,13 +106,13 @@ const posts = (state = initialState, action) => {
           author: '',
         },
         isEditing: false,
-      };
+      }
     case RECEIVE_COMMENTS:
       return {
         ...state,
         comments: action.comments,
         currentComment: null,
-      };
+      }
     case ADDED_COMMENT:
       return {
         ...state,
@@ -122,7 +122,7 @@ const posts = (state = initialState, action) => {
           body: '',
           author: '',
         },
-      };
+      }
     case DELETED_COMMENT:
       return {
         ...state,
@@ -130,7 +130,7 @@ const posts = (state = initialState, action) => {
           comment => comment.id !== action.comment.id,
         ),
         currentComment: null,
-      };
+      }
     case RECEIVE_COMMENT:
       return {
         ...state,
@@ -141,7 +141,7 @@ const posts = (state = initialState, action) => {
           body: '',
           author: '',
         },
-      };
+      }
     case VOTED_ON_COMMENT:
       return {
         ...state,
@@ -149,7 +149,7 @@ const posts = (state = initialState, action) => {
           comment =>
             comment.id === action.comment.id ? action.comment : comment,
         ),
-      };
+      }
     case EDITED_COMMENT:
       return {
         ...state,
@@ -159,27 +159,27 @@ const posts = (state = initialState, action) => {
           body: '',
           author: '',
         },
-      };
+      }
     case SET_ORDER_BY_COMMENTS:
       return {
         ...state,
         commentsOrderBy: action.orderBy,
-      };
+      }
     case SET_WORKING_POST:
       return {
         ...state,
         workingPost: { ...state.workingPost, ...action.post },
         isEditing: true,
-      };
+      }
     case SET_WORKING_COMMENT:
       return {
         ...state,
         workingComment: { ...state.workingComment, ...action.comment },
         isEditing: true,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default posts;
+export default posts
