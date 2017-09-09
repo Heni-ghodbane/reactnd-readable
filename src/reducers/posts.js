@@ -17,6 +17,7 @@ import {
   SET_ORDER_BY_COMMENTS,
   SET_WORKING_POST,
   SET_WORKING_COMMENT,
+  RESET_WORKING_POST,
 } from '../actions'
 
 const initialState = {
@@ -176,6 +177,17 @@ const posts = (state = initialState, action) => {
         ...state,
         workingComment: { ...state.workingComment, ...action.comment },
         isEditing: true,
+      }
+    case RESET_WORKING_POST:
+      return {
+        ...state,
+        workingPost: {
+          category: '',
+          title: '',
+          body: '',
+          author: '',
+        },
+        isEditing: false,
       }
     default:
       return state

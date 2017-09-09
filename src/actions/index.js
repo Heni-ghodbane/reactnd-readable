@@ -1,4 +1,4 @@
-import { RECEIVE_CATEGORIES, fetchCategories } from './categories';
+import { RECEIVE_CATEGORIES, fetchCategories } from './categories'
 
 import {
   RECEIVE_POSTS,
@@ -33,7 +33,9 @@ import {
   setWorkingPost,
   SET_WORKING_COMMENT,
   setWorkingComment,
-} from './posts';
+  RESET_WORKING_POST,
+  resetWorkingPost,
+} from './posts'
 
 export {
   RECEIVE_CATEGORIES,
@@ -70,4 +72,6 @@ export {
   setWorkingPost,
   SET_WORKING_COMMENT,
   setWorkingComment,
-};
+  RESET_WORKING_POST,
+  resetWorkingPost,
+}

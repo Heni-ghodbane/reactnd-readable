@@ -18,6 +18,7 @@ export const EDITED_COMMENT = 'EDITED_COMMENT'
 export const SET_ORDER_BY_COMMENTS = 'SET_ORDER_BY_COMMENTS'
 export const SET_WORKING_POST = 'SET_WORKING_POST'
 export const SET_WORKING_COMMENT = 'SET_WORKING_COMMENT'
+export const RESET_WORKING_POST = 'RESET_WORKING_POST'
 
 export const receivePosts = (category, posts) => ({
   type: RECEIVE_POSTS,
@@ -173,7 +174,12 @@ export const setWorkingPost = post => ({
   type: SET_WORKING_POST,
   post,
 })
+
 export const setWorkingComment = comment => ({
   type: SET_WORKING_COMMENT,
   comment,
+})
+
+export const resetWorkingPost = () => ({
+  type: RESET_WORKING_POST,
 })

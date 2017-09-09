@@ -14,6 +14,10 @@ import uuidv4 from 'uuid/v4'
 import * as actions from '../actions'
 
 class PostAddForm extends Component {
+  componentDidMount() {
+    this.props.resetWorkingPost()
+  }
+
   handleChange = event => {
     const { id, value } = event.target
     this.props.setWorkingPost({ [id]: value })
