@@ -28,6 +28,7 @@ class PostListItem extends PureComponent {
     return (
       <tr>
         <td>{post.title}</td>
+        <td>{post.category}</td>
         <td>{post.body}</td>
         <td>{post.author}</td>
         <td>{formatTimestamp(post.timestamp)}</td>

@@ -3,9 +3,9 @@ const clone = require('clone')
 let db = {}
 
 const defaultData = {
-  '894tuq4ut84ut8v4t8wun89g': {
-    id: '894tuq4ut84ut8v4t8wun89g',
-    parentId: '8xf0y6ziyjabvozdd253nd',
+  '90ad2f29-c436-4505-bd70-d5ef2f7d463b': {
+    id: '90ad2f29-c436-4505-bd70-d5ef2f7d463b',
+    parentId: '2b90a02c-5a46-4702-8373-6ea2ac94bba8',
     timestamp: 1468166872634,
     body: 'Hi there! I am a COMMENT.',
     author: 'thingtwo',
@@ -13,9 +13,9 @@ const defaultData = {
     deleted: false,
     parentDeleted: false,
   },
-  '8tu4bsun805n8un48ve89': {
-    id: '8tu4bsun805n8un48ve89',
-    parentId: '8xf0y6ziyjabvozdd253nd',
+  '23b8e00e-cee6-407d-baf9-d34128d325bd': {
+    id: '23b8e00e-cee6-407d-baf9-d34128d325bd',
+    parentId: '2b90a02c-5a46-4702-8373-6ea2ac94bba8',
     timestamp: 1469479767190,
     body: 'Comments. Are. Cool.',
     author: 'thingone',
@@ -23,9 +23,9 @@ const defaultData = {
     deleted: false,
     parentDeleted: false,
   },
-  '8tu4bsun805n8nu48ve89': {
-    id: '8tu4bsun805n8nu48ve89',
-    parentId: '5ni6ok2ym7fm1a87labc',
+  '81103820-df0e-450a-b874-993984de876c': {
+    id: '81103820-df0e-450a-b874-993984de876c',
+    parentId: 'b2b6df97-dfad-48f6-a040-18837cda5548',
     timestamp: 1469479767190,
     body: 'Thank you!',
     author: 'Joe Frazier',

@@ -3,8 +3,8 @@ const clone = require('clone')
 let db = {}
 
 const defaultData = {
-  '8xf0y6ziyjabvozdd253nd': {
-    id: '8xf0y6ziyjabvozdd253nd',
+  '2b90a02c-5a46-4702-8373-6ea2ac94bba8': {
+    id: '2b90a02c-5a46-4702-8373-6ea2ac94bba8',
     timestamp: 1467166872634,
     title: 'Udacity is the best place to learn React',
     body: 'Everyone says so after all.',
@@ -13,18 +13,18 @@ const defaultData = {
     voteScore: 99,
     deleted: false,
   },
-  '6ni6ok3ym7mf1p33lnez': {
-    id: '6ni6ok3ym7mf1p33lnez',
+  'b2b6df97-dfad-48f6-a040-18837cda5548': {
+    id: 'b2b6df97-dfad-48f6-a040-18837cda5548',
     timestamp: 1468479767190,
     title: 'Learn Redux in 10 minutes!',
     body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-    author: 'Mortimer Blackstone',
+    author: 'Mortimer Knucklehead',
     category: 'redux',
     voteScore: -5,
     deleted: false,
   },
-  '6ni6ok2ym7mf1p33labc': {
-    id: '6ni6ok2ym7mf1p33labc',
+  'b7e00ff4-aee9-4875-91a3-67bade1915f6': {
+    id: 'b7e00ff4-aee9-4875-91a3-67bade1915f6',
     timestamp: 1468479767180,
     title: 'GraphQL and Relay',
     body: 'Here we look into the basics of GraphQL and Relay',
@@ -33,8 +33,8 @@ const defaultData = {
     voteScore: 10,
     deleted: false,
   },
-  '4ni6ko2ym6mf1p33la13': {
-    id: '4ni6ko2ym6mf1p33la13',
+  'c6abb54d-bed3-4219-a4e3-3cce83fc4175': {
+    id: 'c6abb54d-bed3-4219-a4e3-3cce83fc4175',
     timestamp: 1468479767190,
     title: 'ES6 Arrow Functions',
     body: `Let's dive into Es6 arrow functions and see what they are all about.`,
@@ -43,8 +43,8 @@ const defaultData = {
     voteScore: 23,
     deleted: false,
   },
-  '5ni6ok2ym7fm1p33labc': {
-    id: '5ni6ok2ym7fm1p33labc',
+  '1fda31cb-431e-446c-9428-63dfd7c4199a': {
+    id: '1fda31cb-431e-446c-9428-63dfd7c4199a',
     timestamp: 1468479764190,
     title: 'Apollo Tools',
     body: 'Awesome tools for working with GraphQL',
@@ -53,8 +53,8 @@ const defaultData = {
     voteScore: 67,
     deleted: false,
   },
-  '5ni6ok2ym7fm1a87labc': {
-    id: '5ni6ok2ym7fm1a87labc',
+  '6b1127a0-8f06-4ced-ab68-9aa61eec3a64': {
+    id: '6b1127a0-8f06-4ced-ab68-9aa61eec3a64',
     timestamp: 1468479764789,
     title: 'Getting started with ES6 and React',
     body:
